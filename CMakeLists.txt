@@ -73,7 +73,7 @@ ENDIF()
 ########################################################################
 # Install directories
 ########################################################################
-find_package(Gnuradio "3.9" REQUIRED)
+find_package(Gnuradio "3.8" REQUIRED COMPONENTS blocks analog filter fft)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
@@ -113,6 +113,7 @@ endif(APPLE)
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
+find_package(Armadillo REQUIRED)
 
 ########################################################################
 # Setup doxygen option

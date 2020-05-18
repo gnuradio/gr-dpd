@@ -30,3 +30,4 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-dpd)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+GR_ADD_TEST(qa_MP_model_PA ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_MP_model_PA.py)

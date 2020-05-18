@@ -1,0 +1,22 @@
+id: dpd_MP_model_PA
+label: MP model PA
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.MP_model_PA(${Order}, ${Mem_Depth})
+parameters:
+- id: Order
+  label: Order
+  dtype: int
+- id: Mem_Depth
+  label: Mem_depth
+  dtype: int
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+file_format: 1

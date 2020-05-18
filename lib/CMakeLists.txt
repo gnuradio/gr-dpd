@@ -11,7 +11,7 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 list(APPEND dpd_sources
-    )
+    MP_model_PA_impl.cc )
 
 set(dpd_sources "${dpd_sources}" PARENT_SCOPE)
 if(NOT dpd_sources)
@@ -19,8 +19,14 @@ if(NOT dpd_sources)
     return()
 endif(NOT dpd_sources)
 
+if (ARMADILLO_FOUND)
+    LIST(APPEND dpd_sources)
+else ()
+    set(ARMADILLO_LIBRARIES)
+endif ()
+
 add_library(gnuradio-dpd SHARED ${dpd_sources})
-target_link_libraries(gnuradio-dpd gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-dpd gnuradio::gnuradio-runtime gnuradio::gnuradio-blocks ${ARMADILLO_LIBRARIES})
 target_include_directories(gnuradio-dpd
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

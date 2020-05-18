@@ -8,5 +8,8 @@
 %include "dpd_swig_doc.i"
 
 %{
+#include "dpd/MP_model_PA.h"
 %}
 
+%include "dpd/MP_model_PA.h"
+GR_SWIG_BLOCK_MAGIC2(dpd, MP_model_PA);
