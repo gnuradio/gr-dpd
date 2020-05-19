@@ -9,7 +9,7 @@ parameters:
   label: Order
   dtype: int
 - id: Mem_Depth
-  label: Mem_depth
+  label: Memory depth
   dtype: int
 inputs:
 - label: in

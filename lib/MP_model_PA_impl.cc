@@ -96,20 +96,20 @@ namespace gr {
 
       // Do <+signal processing+>
       for (int item = history()-1; item < noutput_items+history()-1; item++) 
-      {   
-        // Converting stream to GMP vector      
+      {  
+      	out[item - history() + 1] = {0, 0}; 
+        // Converting stream to MP vector      
         cx_fcolvec MP_vector(K_a * L_a);
         gen_MP_vector((const gr_complex *) in, item, K_a, L_a, MP_vector);
         for(int K = 0; K < K_a; K++)
         {
           int L_st = (K * L_a);
           int L_en = ((K + 1) * L_a);
-          out[item - history() + 1] = {0, 0};
           for(int L = L_st; L < L_en; L++)
           {
             gr_complex a = MP_vector(L);
             gr_complex b = coeff(K, (L - L_st));
-            out[item - history() + 1] = a * b;
+            out[item - history() + 1] += (a * b);
           }
         }
       }
