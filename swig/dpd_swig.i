@@ -9,7 +9,10 @@
 
 %{
 #include "dpd/MP_model_PA.h"
+#include "dpd/GMP_model_PA.h"
 %}
 
 %include "dpd/MP_model_PA.h"
 GR_SWIG_BLOCK_MAGIC2(dpd, MP_model_PA);
+%include "dpd/GMP_model_PA.h"
+GR_SWIG_BLOCK_MAGIC2(dpd, GMP_model_PA);

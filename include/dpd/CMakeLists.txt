@@ -11,5 +11,6 @@
 ########################################################################
 install(FILES
     api.h
-    MP_model_PA.h DESTINATION include/dpd
+    MP_model_PA.h
+    GMP_model_PA.h DESTINATION include/dpd
 )

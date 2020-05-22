@@ -1,0 +1,32 @@
+id: dpd_GMP_model_PA
+label: GMP model PA
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.GMP_model_PA(${model_param1}, ${model_param2}, ${model_param3}, ${model_param4},
+    ${model_param5})
+parameters:
+- id: model_param1
+  label: Model Param 1 (Ka)
+  dtype: int
+- id: model_param2
+  label: Model Param 2 (La)
+  dtype: int
+- id: model_param3
+  label: Model Param 3 (Kb)
+  dtype: int
+- id: model_param4
+  label: Model Param 4 (Mb)
+  dtype: int
+- id: model_param5
+  label: Model Param 5 (Lb)
+  dtype: int
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+file_format: 1

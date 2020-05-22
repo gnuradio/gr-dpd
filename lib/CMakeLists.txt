@@ -11,7 +11,8 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 list(APPEND dpd_sources
-    MP_model_PA_impl.cc )
+    MP_model_PA_impl.cc
+    GMP_model_PA_impl.cc )
 
 set(dpd_sources "${dpd_sources}" PARENT_SCOPE)
 if(NOT dpd_sources)

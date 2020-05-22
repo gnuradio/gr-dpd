@@ -6,5 +6,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 install(FILES
-    dpd_MP_model_PA.block.yml DESTINATION share/gnuradio/grc/blocks
+    dpd_MP_model_PA.block.yml
+    dpd_GMP_model_PA.block.yml DESTINATION share/gnuradio/grc/blocks
 )
