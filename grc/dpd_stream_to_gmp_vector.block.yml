@@ -1,0 +1,21 @@
+id: dpd_stream_to_gmp_vector
+label: Stream to GMP vector
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.stream_to_gmp_vector(${dpd_params})
+parameters:
+- id: dpd_params
+  label: Dpd_params
+  dtype: int_vector
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  vlen: ${ (dpd_params[0]*dpd_params[1] + dpd_params[2]*dpd_params[3]*dpd_params[4])
+    }
+file_format: 1
