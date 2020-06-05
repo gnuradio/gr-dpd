@@ -1,0 +1,25 @@
+id: dpd_RLS_postdistorter
+label: RLS postdistorter
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.RLS_postdistorter(${dpd_params}, ${iter_limit})
+parameters:
+- id: dpd_params
+  label: Dpd_params
+  dtype: int_vector
+- id: iter_limit
+  label: Iter_limit
+  dtype: int
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+- label: PA Input
+  domain: message
+  id: PA_input
+outputs:
+- label: taps
+  domain: message
+  id: taps
+file_format: 1
