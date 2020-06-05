@@ -10,6 +10,6 @@ inputs:
   dtype: complex
 outputs:
 - label: Samples
-  id: samples
   domain: message
+  id: samples
 file_format: 1
