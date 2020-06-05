@@ -1,0 +1,15 @@
+id: dpd_stream_to_message
+label: Stream to Message
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.stream_to_message()
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+outputs:
+- label: Samples
+  id: samples
+  domain: message
+file_format: 1
