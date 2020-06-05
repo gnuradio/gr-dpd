@@ -1,4 +1,41 @@
 // Implementation of RLS based coefficient estimator
+/*
+------------------------------------------------------------------------------------------------------------|
+  Terminal Command to build this file: g++ RLS_coeff_estimation.cpp -O1 -llapack -lblas -larmadillo        
+  Example Input Format:                                                                                     
+------------------------------------------------------------------------------------------------------------|
+  Estimate coefficients: y/n                                                                                
+  y
+  Enter PA_input(pre-distorted) - Real and Imag. parts:                                                     |
+  1.5 2.0
+  Enter PA_output (Gain phase-calibrated) - Real and Imag. parts: 
+  1.0 1.7                                                                                                   |
+  K_a, L_a, K_b, M_b and L_b Parameters of PA model for postdistorter:                                      
+  2 3 2 2 2
+  Enter number of Iterations:                                                                               |
+  10
+  inv_sqrt_gamma_iMinus1: 858.336
+  Error before Updation of weights: (-1.7,0)                                                                |
+  Taps: 
+      (+7.429e-01,+0.000e+00)
+                        (0,0)                                                                               |
+                        (0,0)
+      (-4.370e-01,+0.000e+00)
+                        (0,0)                                                                               |
+                        (0,0)
+                        (0,0)
+                        (0,0)                                                                               |
+                        (0,0)
+                        (0,0) 
+                        (0,0)                                                                               |                           
+                        (0,0)
+                        (0,0)
+                        (0,0)                                                                               |
+
+  Error after Updation of weights: (-2.30746e-06,0)
+  Estimate coefficients: y/n                                                                                |
+------------------------------------------------------------------------------------------------------------
+*/
 
 #include<iostream>
 #include<armadillo>
@@ -460,9 +497,10 @@ int main()
     // adjust post-distorted PA output dimensions
     extract_postdistorted_y(yy_cx_frowvec, y, K_a, L_a, K_b, M_b, L_b, M);
           
+    cout << std::fixed;
     // adaptation error
     error = pa_input - as_scalar(y*w_iMinus1);          
-
+    cout << "Error before Updation of weights: " << error << "\n";
     // update weight-vector
     w_iMinus1 = w_iMinus1+(error/inv_sqrt_gamma_iMinus1)*g_vec_i;	    
 	
@@ -470,5 +508,8 @@ int main()
     L_bar_iMinus1 = gr_complexd(one_over_sqrt_lambda, 0.0) * B_mat( span(1, M+M_bar), span(1, 2*M_bar) );          
 
     w_iMinus1.print("Taps: ");
+    error = pa_input - as_scalar(y*w_iMinus1);
+    cout << "\n Error after Updation of weights: " << error << "\n";
+  }
 }
-}
+
