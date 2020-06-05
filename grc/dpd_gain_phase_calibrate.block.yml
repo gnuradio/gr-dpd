@@ -1,0 +1,18 @@
+id: dpd_gain_phase_calibrate
+label: Gain Phase Calibrate
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.gain_phase_calibrate()
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+- label: Samples
+  domain: message
+  id: samples
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+file_format: 1

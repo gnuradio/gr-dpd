@@ -1,0 +1,109 @@
+/* -*- c++ -*- */
+/*
+ * Copyright 2020 gr-dpd author.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include <gnuradio/io_signature.h>
+#include "gain_phase_calibrate_impl.h"
+#include <dpd/dpd_utils.h>
+namespace gr {
+  namespace dpd {
+
+    gain_phase_calibrate::sptr
+    gain_phase_calibrate::make()
+    {
+      return gnuradio::get_initial_sptr
+        (new gain_phase_calibrate_impl());
+    }
+
+
+    /*
+     * The private constructor
+     */
+    gain_phase_calibrate_impl::gain_phase_calibrate_impl()
+      : gr::block("gain_phase_calibrate",
+              gr::io_signature::make(1, 1, sizeof(gr_complex)),
+              gr::io_signature::make(1, 1, sizeof(gr_complex)))
+    {
+      previous_cfactor = gr_complex(0.0, 0.0);
+      d_reference_acquired = false;
+      d_sample = gr_complex(0.0, 0.0);
+
+      // Setup input port
+      message_port_register_in(pmt::mp("samples"));
+      set_msg_handler(pmt::mp("samples"),
+      boost::bind(&gain_phase_calibrate_impl::set_reference, this, _1));     
+    }
+
+    void 
+    gain_phase_calibrate_impl::set_reference(pmt::pmt_t P) 
+    {
+      d_reference_acquired = true;
+
+      // extract reference samples from the message
+      d_sample = pmt::to_complex(P);   
+    }
+
+    /*
+     * Our virtual destructor.
+     */
+    gain_phase_calibrate_impl::~gain_phase_calibrate_impl()
+    {
+    }
+
+    void
+    gain_phase_calibrate_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+    {
+      /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+    }
+
+    int
+    gain_phase_calibrate_impl::general_work (int noutput_items,
+                       gr_vector_int &ninput_items_,
+                       gr_vector_const_void_star &input_items,
+                       gr_vector_void_star &output_items)
+    {
+      const gr_complex *in = (const gr_complex *) input_items[0];
+      gr_complex *out = (gr_complex *) output_items[0];
+
+
+      ninput_items = std::min(ninput_items_[0], noutput_items);
+      item = 0; 
+
+      while (item < ninput_items) 
+      {  
+        reference_acquired = d_reference_acquired;
+        sample = d_sample;
+        if (reference_acquired) 
+        {
+
+          current_cfactor = sample/in[item];
+          cfactor = gr_complex(0.5, 0.0)*(previous_cfactor + current_cfactor); 
+
+          if ( !almost_equals_zero(std::real(in[item]), 5) && !almost_equals_zero(std::imag(in[item]), 5) )
+            previous_cfactor = cfactor;
+
+          out[item] = cfactor*in[item];
+          item++;
+        }
+       
+      }
+
+      // Do <+signal processing+>
+      // Tell runtime system how many input items we consumed on
+      // each input stream.
+      consume_each (noutput_items);
+
+      // Tell runtime system how many output items we produced.
+      return ninput_items;
+    }
+
+  } /* namespace dpd */
+} /* namespace gr */
+
