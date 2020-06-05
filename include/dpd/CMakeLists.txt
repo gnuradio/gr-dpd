@@ -11,6 +11,12 @@
 ########################################################################
 install(FILES
     api.h
+    dpd_utils.h
     MP_model_PA.h
-    GMP_model_PA.h DESTINATION include/dpd
+    GMP_model_PA.h
+    predistorter_training.h
+    RLS_postdistorter.h
+    stream_to_gmp_vector.h
+    gain_phase_calibrate.h
+    stream_to_message.h DESTINATION include/dpd
 )

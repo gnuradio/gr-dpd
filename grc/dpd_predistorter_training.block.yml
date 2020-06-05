@@ -1,0 +1,26 @@
+id: dpd_predistorter_training
+label: Predistorter training block
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.predistorter_training(${M})
+parameters:
+- id: M
+  label: M
+  dtype: int
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+  vlen: ${ M }
+- label: taps
+  domain: message
+  id: taps
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+- label: PA Input
+  domain: message
+  id: PA_input
+file_format: 1

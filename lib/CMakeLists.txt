@@ -11,8 +11,14 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 list(APPEND dpd_sources
+    dpd_utils.cc
     MP_model_PA_impl.cc
-    GMP_model_PA_impl.cc )
+    GMP_model_PA_impl.cc
+    predistorter_training_impl.cc
+    RLS_postdistorter_impl.cc
+    stream_to_gmp_vector_impl.cc
+    gain_phase_calibrate_impl.cc
+    stream_to_message_impl.cc )
 
 set(dpd_sources "${dpd_sources}" PARENT_SCOPE)
 if(NOT dpd_sources)
