@@ -45,7 +45,13 @@ namespace gr {
       ~RLS_postdistorter_impl();
 
       void get_PA_input(pmt::pmt_t P);
-
+      bool almost_equal(double a, double b, double tol);
+      void givens_rotate(const cx_mat & in, cx_mat & out);
+      void hgivens_rotate(const cx_mat & in, cx_mat & out);
+      void extract_g_vecs(cx_mat &g, cx_mat &g_vec_iMinus1, cx_mat &g_vec_i, int K_a, int L_a, int K_b, int M_b, int L_b, int M, int M_bar);
+      void extract_postdistorted_y(cx_fmat &y_in, cx_fmat &y, int K_a, int L_a, int K_b, int M_b, int L_b, int M);
+      void apply_rotations(const cx_mat & A, cx_mat & B);
+      void gen_GMPvector(const gr_complex *const in, int item, int K_a, int L_a, int K_b, int M_b, int L_b, cx_fcolvec &GMP_vector);
       // Where all the action really happens
       int work(
               int noutput_items,

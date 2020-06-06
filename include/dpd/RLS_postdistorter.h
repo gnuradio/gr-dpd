@@ -10,7 +10,6 @@
 
 #include <dpd/api.h>
 #include <gnuradio/sync_block.h>
-#include <dpd/dpd_utils.h>
 
 namespace gr {
   namespace dpd {
