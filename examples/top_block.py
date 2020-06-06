@@ -116,8 +116,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.dpd_stream_to_gmp_vector_0 = dpd.stream_to_gmp_vector((2, 3, 2, 3, 2))
         self.dpd_predistorter_training_0 = dpd.predistorter_training(18)
         self.dpd_gain_phase_calibrate_0 = dpd.gain_phase_calibrate()
-        self.dpd_RLS_postdistorter_0 = dpd.RLS_postdistorter({2, 3, 2, 3, 2}, 100)
-        self.dpd_GMP_model_PA_0 = dpd.GMP_model_PA(2, 3, 2, 3, 2)
+        self.dpd_RLS_postdistorter_0 = dpd.RLS_postdistorter((2, 3, 2, 3, 2), 1000)
+        self.dpd_GMP_model_PA_0 = dpd.GMP_model_PA(2, 2, 2, 2, 2)
         self.analog_sig_source_x_0 = analog.sig_source_c(25000, analog.GR_COS_WAVE, 1000, 1, 0, 0)
 
 
@@ -126,8 +126,8 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.dpd_RLS_postdistorter_0, 'taps'), (self.dpd_predistorter_training_0, 'taps'))
-        self.msg_connect((self.dpd_predistorter_training_0, 'PA Input'), (self.dpd_RLS_postdistorter_0, 'PA Input'))
-        self.msg_connect((self.dpd_stream_to_message_0, 'Samples'), (self.dpd_gain_phase_calibrate_0, 'Samples'))
+        self.msg_connect((self.dpd_predistorter_training_0, 'PA_input'), (self.dpd_RLS_postdistorter_0, 'PA_input'))
+        self.msg_connect((self.dpd_stream_to_message_0, 'samples'), (self.dpd_gain_phase_calibrate_0, 'samples'))
         self.connect((self.analog_sig_source_x_0, 0), (self.dpd_stream_to_gmp_vector_0, 0))
         self.connect((self.analog_sig_source_x_0, 0), (self.dpd_stream_to_message_0, 0))
         self.connect((self.dpd_GMP_model_PA_0, 0), (self.dpd_gain_phase_calibrate_0, 0))

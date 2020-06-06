@@ -63,15 +63,15 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     model_param1: '2'
-    model_param2: '3'
+    model_param2: '2'
     model_param3: '2'
-    model_param4: '3'
+    model_param4: '2'
     model_param5: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [890, 27]
+    coordinate: [865, 20]
     rotation: 0
     state: true
 - name: dpd_RLS_postdistorter_0
@@ -80,15 +80,15 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: '{2, 3, 2, 3, 2}'
-    iter_limit: '100'
+    dpd_params: (2, 3, 2, 3, 2)
+    iter_limit: '1000'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [539, 234]
+    coordinate: [578, 235]
     rotation: 0
     state: true
 - name: dpd_gain_phase_calibrate_0
@@ -242,9 +242,9 @@ connections:
 - [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
 - [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
-- [dpd_predistorter_training_0, PA Input, dpd_RLS_postdistorter_0, PA Input]
+- [dpd_predistorter_training_0, PA_input, dpd_RLS_postdistorter_0, PA_input]
 - [dpd_stream_to_gmp_vector_0, '0', dpd_predistorter_training_0, '0']
-- [dpd_stream_to_message_0, Samples, dpd_gain_phase_calibrate_0, Samples]
+- [dpd_stream_to_message_0, samples, dpd_gain_phase_calibrate_0, samples]
 
 metadata:
   file_format: 1
