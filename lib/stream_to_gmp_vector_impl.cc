@@ -14,7 +14,7 @@
 #include <armadillo>
 #include <algorithm>
 #include <math.h>
-#include <dpd/dpd_utils.h>
+
 #define COPY_MEM false  // Do not copy vectors into separate memory
 #define FIX_SIZE true // Keep dimensions of vectors constant
 
@@ -56,7 +56,30 @@ namespace gr {
     stream_to_gmp_vector_impl::~stream_to_gmp_vector_impl()
     {
     }
+    void stream_to_gmp_vector_impl::gen_GMPvector(const gr_complex *const in, int item, 
+    int K_a, int L_a, int K_b, int M_b, int L_b, cx_fcolvec &GMP_vector)
+    {
+      /* Signal-and-Aligned Envelope */
+      // stacking L_a elements in reverse order
+      cx_fcolvec y_vec_arma1(L_a, fill::zeros); 
+      for (int ii = L_a-1; ii >= 0; ii--) 
+      y_vec_arma1(ii) = in[item-ii]; 
+      GMP_vector.rows(0, L_a-1) = y_vec_arma1;  
 
+      //store abs() of y_vec_arma1
+      cx_fcolvec abs_y_vec_arma1( size(y_vec_arma1), fill::zeros );
+      abs_y_vec_arma1.set_real( abs(y_vec_arma1) );
+
+      cx_fcolvec yy_temp;
+      yy_temp = y_vec_arma1%abs_y_vec_arma1;
+      GMP_vector.rows(L_a, 2*L_a-1) = yy_temp;
+      for (int kk = 2; kk<K_a; kk++) {
+      // perform element-wise product using the overloaded % operator
+      yy_temp = yy_temp%abs_y_vec_arma1;
+  
+      GMP_vector.rows(kk*L_a, (kk+1)*L_a-1) = yy_temp;
+    }
+    }
     int
     stream_to_gmp_vector_impl::work(int noutput_items,
         gr_vector_const_void_star &input_items,

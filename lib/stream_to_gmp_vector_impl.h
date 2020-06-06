@@ -9,6 +9,9 @@
 #define INCLUDED_DPD_STREAM_TO_GMP_VECTOR_IMPL_H
 
 #include <dpd/stream_to_gmp_vector.h>
+#include <armadillo>
+
+using namespace arma;
 
 namespace gr {
   namespace dpd {
@@ -29,6 +32,8 @@ namespace gr {
       stream_to_gmp_vector_impl(const std::vector<int> &dpd_params);
       ~stream_to_gmp_vector_impl();
 
+      
+      void gen_GMPvector(const gr_complex *const in, int item, int K_a, int L_a, int K_b, int M_b, int L_b, cx_fcolvec &GMP_vector);
       // Where all the action really happens
       int work(
               int noutput_items,
