@@ -9,7 +9,7 @@ inputs:
   domain: stream
   dtype: complex
 outputs:
-- label: Samples
+- label: samples
   domain: message
   id: samples
 file_format: 1

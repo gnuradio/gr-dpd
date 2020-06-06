@@ -18,8 +18,7 @@ namespace gr {
     stream_to_message::sptr
     stream_to_message::make()
     {
-      return gnuradio::get_initial_sptr
-        (new stream_to_message_impl());
+      return gnuradio::get_initial_sptr(new stream_to_message_impl());
     }
 
 
