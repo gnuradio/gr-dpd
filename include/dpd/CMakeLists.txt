@@ -11,7 +11,6 @@
 ########################################################################
 install(FILES
     api.h
-    dpd_utils.h
     MP_model_PA.h
     GMP_model_PA.h
     predistorter_training.h

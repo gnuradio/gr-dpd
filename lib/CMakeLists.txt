@@ -11,7 +11,6 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 list(APPEND dpd_sources
-    dpd_utils.cc
     MP_model_PA_impl.cc
     GMP_model_PA_impl.cc
     predistorter_training_impl.cc
