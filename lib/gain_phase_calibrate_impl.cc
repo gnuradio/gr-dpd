@@ -11,7 +11,6 @@
 
 #include <gnuradio/io_signature.h>
 #include "gain_phase_calibrate_impl.h"
-#include <dpd/dpd_utils.h>
 namespace gr {
   namespace dpd {
 
@@ -40,7 +39,13 @@ namespace gr {
       set_msg_handler(pmt::mp("samples"),
       boost::bind(&gain_phase_calibrate_impl::set_reference, this, _1));     
     }
-
+    /*
+     * Our virtual destructor.
+     */
+    gain_phase_calibrate_impl::~gain_phase_calibrate_impl()
+    {
+    }
+    
     void 
     gain_phase_calibrate_impl::set_reference(pmt::pmt_t P) 
     {
@@ -49,20 +54,16 @@ namespace gr {
       // extract reference samples from the message
       d_sample = pmt::to_complex(P);   
     }
-
-    /*
-     * Our virtual destructor.
-     */
-    gain_phase_calibrate_impl::~gain_phase_calibrate_impl()
+    bool gain_phase_calibrate_impl::almost_equals_zero(double a, int num_digits)
     {
-    }
+      // identify the first few significant digits
+      int na = floor(fabs(a)*pow(10.0, num_digits));
+  
+      if (na == 0)
+        return true;
 
-    void
-    gain_phase_calibrate_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
-    {
-      /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+        return false;
     }
-
     int
     gain_phase_calibrate_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items_,

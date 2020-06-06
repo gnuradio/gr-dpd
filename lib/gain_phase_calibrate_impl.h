@@ -27,9 +27,9 @@ namespace gr {
       ~gain_phase_calibrate_impl();
 
       // Where all the action really happens
-      void forecast (int noutput_items, gr_vector_int &ninput_items_required);
       void set_reference(pmt::pmt_t P);
-
+      
+      bool almost_equals_zero(double a, int num_digits);
       int general_work(int noutput_items,
            gr_vector_int &ninput_items,
            gr_vector_const_void_star &input_items,
