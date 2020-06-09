@@ -14,6 +14,7 @@ Major DPD Algorithms considered for this module are:
 * Fast RLS based Algorithm 
 * LMS (Least Mean Squares) Algorithm
 * Look-Up Table based Algorithm
+
 So, far RLS based algorithm has been implemented. 
 
 The blocks added to the module, so far, are:
