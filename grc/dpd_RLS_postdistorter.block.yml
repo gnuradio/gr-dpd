@@ -15,7 +15,7 @@ inputs:
 - label: in
   domain: stream
   dtype: complex
-- label: PA Input
+- label: PA_input
   domain: message
   id: PA_input
 outputs:
