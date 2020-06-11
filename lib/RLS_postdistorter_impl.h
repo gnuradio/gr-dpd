@@ -9,7 +9,6 @@
 #define INCLUDED_DPD_RLS_POSTDISTORTER_IMPL_H
 
 #include <dpd/RLS_postdistorter.h>
-#include <dpd/dpd_utils.h>
 #include <armadillo>
 using namespace arma;
 
