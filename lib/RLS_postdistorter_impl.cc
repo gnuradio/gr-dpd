@@ -435,7 +435,7 @@ void RLS_postdistorter_impl::apply_rotations(const cx_mat & A, cx_mat & B)
 
         if ( ack_predistorter_updated ) 
         {
-          std::cout << "Iteration Number: " << iteration << std::endl;                
+          //std::cout << "Iteration Number: " << iteration << std::endl;                
 
           // extracting the PA output and arranging into a shift-structured GMP vector
           // sreg[49] = pa_output_smooth; 
@@ -456,7 +456,7 @@ void RLS_postdistorter_impl::apply_rotations(const cx_mat & A, cx_mat & B)
     
           // time-update for 1/sqrt(gamma)
           inv_sqrt_gamma_iMinus1 = real(B_mat(0, 0)); // imag(B_mat(0, 0)) will be ~= 0.0          
-          std::cout << "inv_sqrt_gamma_iMinus1: " << inv_sqrt_gamma_iMinus1 << std::endl;
+          //std::cout << "inv_sqrt_gamma_iMinus1: " << inv_sqrt_gamma_iMinus1 << std::endl;
             
           // time-update for g-vector
           g = B_mat(span(1, M+M_bar), 0);    
