@@ -46,21 +46,22 @@ cx_fmat coeff = {
 namespace gr {
 namespace dpd {
 
-MP_model_PA::sptr MP_model_PA::make(int Order, int Mem_Depth)
+MP_model_PA::sptr MP_model_PA::make(int Order, int Mem_Depth, int Mode)
 {
-    return gnuradio::get_initial_sptr(new MP_model_PA_impl(Order, Mem_Depth));
+    return gnuradio::get_initial_sptr(new MP_model_PA_impl(Order, Mem_Depth, Mode));
 }
 
 
 /*
  * The private constructor
  */
-MP_model_PA_impl::MP_model_PA_impl(int Order, int Mem_Depth)
+MP_model_PA_impl::MP_model_PA_impl(int Order, int Mem_Depth, int Mode)
     : gr::sync_block("MP_model_PA",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
       K_a(Order),    // Max. Order limited to 7
-      L_a(Mem_Depth) // Max no. of taps or memory depth limited to 4
+      L_a(Mem_Depth), // Max no. of taps or memory depth limited to 4
+      Mode_val(Mode)
 {
     set_history(L_a);
 }
@@ -114,6 +115,10 @@ int MP_model_PA_impl::work(int noutput_items,
         for (int K = 0; K < K_a; K++) {
             int L_st = (K * L_a);
             int L_en = ((K + 1) * L_a);
+            if((K % 2) == 0 && Mode_val == 1)
+            	continue;
+            else if((K % 2) && Mode_val == 2)
+            	continue;
             for (int L = L_st; L < L_en; L++) {
                 gr_complex a = MP_vector(L);
                 gr_complex b = coeff(K, (L - L_st));

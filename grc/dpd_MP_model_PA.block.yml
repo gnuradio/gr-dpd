@@ -3,14 +3,20 @@ label: MP model PA
 category: '[Dpd]'
 templates:
   imports: import dpd
-  make: dpd.MP_model_PA(${Order}, ${Mem_Depth})
+  make: dpd.MP_model_PA(${Order}, ${Mem_Depth}, ${Mode})
 parameters:
 - id: Order
   label: Order
   dtype: int
 - id: Mem_Depth
-  label: Memory depth
+  label: Mem_depth
   dtype: int
+- id: Mode
+  label: Mode of Operation
+  dtype: int
+  default: 0
+  options: [0, 1, 2]
+  option_labels: [Both Terms, Even Terms Only, Odd Terms Only]
 inputs:
 - label: in
   domain: stream

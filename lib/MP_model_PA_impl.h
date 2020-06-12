@@ -23,8 +23,9 @@ class MP_model_PA_impl : public MP_model_PA
 private:
     int K_a; // No. of channels or order of PA model
     int L_a; // No. of taps or memory-depth
+    int Mode_val; 
 public:
-    MP_model_PA_impl(int Order, int Mem_Depth);
+    MP_model_PA_impl(int Order, int Mem_Depth, int Mode);
     ~MP_model_PA_impl();
 
     // Where all the action really happens
