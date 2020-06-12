@@ -191,6 +191,7 @@ blocks:
   id: dpd_MP_model_PA
   parameters:
     Mem_Depth: '3'
+    Mode: '1'
     Order: '4'
     affinity: ''
     alias: ''

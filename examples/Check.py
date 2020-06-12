@@ -183,7 +183,7 @@ class Check(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.dpd_MP_model_PA_0 = dpd.MP_model_PA(4, 3)
+        self.dpd_GMP_model_PA_1 = dpd.GMP_model_PA(1, 1, 1, 1, 1, 0)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         self.analog_sig_source_x_1 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, -tone_param_0, tone_param_1, 0, 0)
@@ -199,9 +199,9 @@ class Check(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.analog_sig_source_x_1, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.dpd_MP_model_PA_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.dpd_GMP_model_PA_1, 0))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_freq_sink_x_1, 0))
-        self.connect((self.dpd_MP_model_PA_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.dpd_GMP_model_PA_1, 0), (self.qtgui_freq_sink_x_0, 0))
 
 
     def closeEvent(self, event):
