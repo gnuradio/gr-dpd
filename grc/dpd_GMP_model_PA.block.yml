@@ -4,23 +4,29 @@ category: '[Dpd]'
 templates:
   imports: import dpd
   make: dpd.GMP_model_PA(${model_param1}, ${model_param2}, ${model_param3}, ${model_param4},
-    ${model_param5})
+    ${model_param5}, ${mode})
 parameters:
 - id: model_param1
-  label: Model Param 1 (Ka)
+  label: Model_param1
   dtype: int
 - id: model_param2
-  label: Model Param 2 (La)
+  label: Model_param2
   dtype: int
 - id: model_param3
-  label: Model Param 3 (Kb)
+  label: Model_param3
   dtype: int
 - id: model_param4
-  label: Model Param 4 (Mb)
+  label: Model_param4
   dtype: int
 - id: model_param5
-  label: Model Param 5 (Lb)
+  label: Model_param5
   dtype: int
+- id: mode
+  label: Mode of Operation
+  dtype: int
+  default: 0
+  options: [0, 1, 2]
+  option_labels: [Both Terms, Even Terms Only, Odd Terms Only]
 inputs:
 - label: in
   domain: stream

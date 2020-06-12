@@ -36,7 +36,8 @@ public:
                      int model_param2,
                      int model_param3,
                      int model_param4,
-                     int model_param5);
+                     int model_param5,
+                     int mode);
 };
 
 } // namespace dpd

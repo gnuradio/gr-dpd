@@ -27,12 +27,14 @@ private:
     int M_b;
     int L_b;
     int M; // No. of Coefficients
+    int Mode_vl;
 public:
     GMP_model_PA_impl(int model_param1,
                       int model_param2,
                       int model_param3,
                       int model_param4,
-                      int model_param5);
+                      int model_param5,
+                      int mode);
     ~GMP_model_PA_impl();
 
     // Where all the action really happens

@@ -56,10 +56,11 @@ GMP_model_PA::sptr GMP_model_PA::make(int model_param1,
                                       int model_param2,
                                       int model_param3,
                                       int model_param4,
-                                      int model_param5)
+                                      int model_param5,
+                                      int mode)
 {
     return gnuradio::get_initial_sptr(new GMP_model_PA_impl(
-        model_param1, model_param2, model_param3, model_param4, model_param5));
+        model_param1, model_param2, model_param3, model_param4, model_param5, mode));
 }
 
 
@@ -70,7 +71,8 @@ GMP_model_PA_impl::GMP_model_PA_impl(int model_param1,
                                      int model_param2,
                                      int model_param3,
                                      int model_param4,
-                                     int model_param5)
+                                     int model_param5,
+                                     int mode)
     : gr::sync_block("GMP_model_PA",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
@@ -79,7 +81,8 @@ GMP_model_PA_impl::GMP_model_PA_impl(int model_param1,
       K_b(model_param3),
       M_b(model_param4),
       L_b(model_param5),
-      M(model_param1 * model_param2 + model_param3 * model_param4 * model_param5)
+      M(model_param1 * model_param2 + model_param3 * model_param4 * model_param5),
+      Mode_vl(mode)
 {
     set_history(std::max(L_a, M_b + L_b));
     coeff2.slice(0) = coef;
@@ -171,6 +174,11 @@ int GMP_model_PA_impl::work(int noutput_items,
         for (int K = 0; K < K_a; K++) {
             int L_st = (K * L_a);
             int L_en = ((K + 1) * L_a);
+            // Include terms in output according to Mode of Operation value
+            if((K % 2) == 0 && Mode_vl == 1)
+              continue;
+            else if((K % 2) && Mode_vl == 2)
+              continue;
             for (int L = L_st; L < L_en; L++) {
                 gr_complex a = GMP_vector(L);
                 gr_complex b = coeff1(K, (L - L_st));
@@ -182,6 +190,11 @@ int GMP_model_PA_impl::work(int noutput_items,
         // out[item - history() + 1] += (a * b);
         for (int m = 0; m < M_b; m++) {
             for (int k = 0; k < K_b; k++) {
+                // Include terms in output according to Mode of Operation value
+                if((k % 2) == 0 && Mode_vl == 2)
+                  continue;
+                else if((k % 2) && Mode_vl == 1)
+                  continue; 
                 int L_st = (m * L_b * K_b) + (K_a * L_a) + k * L_a;
                 int L_en = (m * L_b * K_b) + (K_a * L_a) + (k + 1) * L_a;
                 for (int l = L_st; l < L_en; l++) {
