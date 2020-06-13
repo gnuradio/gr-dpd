@@ -73,7 +73,7 @@ Various example flowgraphs have been added so far to demonstrate the functioning
 
 Below is the flowgraph demonstrating a RLS based predistortion run on a GMP model Power Amplifier:
 
-![Test.grc - flowgraph](https://github.com/gnuradio/gr-dpd/blob/master/raw/Test.jpg)<br>
+![Test.grc - flowgraph](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_test_run_two_tone_setup.jpg)<br>
 
 ## Bugs reporting:
 Kindly report any bugs or issues [on Github](https://github.com/gnuradio/gr-dpd/issues/).
