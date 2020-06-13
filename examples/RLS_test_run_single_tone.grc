@@ -62,6 +62,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    mode: '0'
     model_param1: '2'
     model_param2: '2'
     model_param3: '2'
@@ -89,7 +90,7 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [578, 235]
-    rotation: 0
+    rotation: 180
     state: true
 - name: dpd_gain_phase_calibrate_0
   id: dpd_gain_phase_calibrate
@@ -103,8 +104,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [580, 391]
-    rotation: 0
+    coordinate: [830, 365]
+    rotation: 180
     state: true
 - name: dpd_predistorter_training_0
   id: dpd_predistorter_training
@@ -230,7 +231,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1196, 144]
+    coordinate: [1170, 176]
     rotation: 0
     state: true
 
