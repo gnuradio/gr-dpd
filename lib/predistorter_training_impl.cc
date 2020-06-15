@@ -45,7 +45,7 @@ predistorter_training_impl::predistorter_training_impl(int M)
 
     // setup output message port for
     // sending predistorted PA input to the postdistorter
-    message_port_register_out(pmt::mp("PA_input"));
+    //message_port_register_out(pmt::mp("PA_input"));
 
     // setup input message port
     message_port_register_in(pmt::mp("taps"));
@@ -85,8 +85,8 @@ int predistorter_training_impl::work(int noutput_items,
         // apply predistortion and send the PA input to postdistorter
         out[item] = as_scalar(
             conv_to<cx_fmat>::from(yy_cx_rowvec * predistorter_training_colvec));
-        pmt::pmt_t P_complex_PA_input = pmt::from_complex(out[item]);
-        message_port_pub(pmt::mp("PA_input"), P_complex_PA_input);
+        // pmt::pmt_t P_complex_PA_input = pmt::from_complex(out[item]);
+        // message_port_pub(pmt::mp("PA_input"), P_complex_PA_input);
     }
     // Tell runtime system how many output items we produced.
     return noutput_items;

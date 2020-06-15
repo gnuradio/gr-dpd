@@ -20,7 +20,4 @@ outputs:
 - label: out
   domain: stream
   dtype: complex
-- label: PA_input
-  domain: message
-  id: PA_input
 file_format: 1
