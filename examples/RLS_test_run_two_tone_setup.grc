@@ -226,7 +226,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [714, 560]
+    coordinate: [712, 572]
     rotation: 0
     state: true
 - name: dpd_RLS_postdistorter_0
@@ -236,14 +236,14 @@ blocks:
     alias: ''
     comment: ''
     dpd_params: (1, 1, 2, 2, 2)
-    iter_limit: '10000'
+    iter_limit: '1000'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1005, 258]
+    coordinate: [963, 294]
     rotation: 180
     state: true
 - name: dpd_gain_phase_calibrate_0
@@ -258,7 +258,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1276, 241]
+    coordinate: [1245, 430]
     rotation: 180
     state: true
 - name: dpd_predistorter_training_0
@@ -274,7 +274,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [983, 101]
+    coordinate: [949, 89]
     rotation: 0
     state: true
 - name: dpd_stream_to_gmp_vector_0
@@ -290,22 +290,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [706, 282]
-    rotation: 0
-    state: true
-- name: dpd_stream_to_message_0
-  id: dpd_stream_to_message
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1363, 464]
+    coordinate: [652, 262]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1
@@ -340,7 +325,7 @@ blocks:
     comment: ''
     ctrlpanel: 'False'
     fc: '0'
-    fftsize: '2048'
+    fftsize: '4096'
     freqhalf: 'True'
     grid: 'False'
     gui_hint: '[1,0,4,1]'
@@ -378,14 +363,14 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: firdes.WIN_FLATTOP
     ymax: '10'
     ymin: '-140'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1011, 596]
+    coordinate: [1056, 618]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2
@@ -420,7 +405,7 @@ blocks:
     comment: ''
     ctrlpanel: 'False'
     fc: '0'
-    fftsize: '2048'
+    fftsize: '4096'
     freqhalf: 'True'
     grid: 'False'
     gui_hint: '[1,1,4,1]'
@@ -458,14 +443,14 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: firdes.WIN_FLATTOP
     ymax: '10'
     ymin: '-140'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1627, 51]
+    coordinate: [1633, 70]
     rotation: 0
     state: true
 
@@ -475,17 +460,16 @@ connections:
 - [analog_sig_source_x_1, '0', blocks_add_xx_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
 - [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [blocks_throttle_0, '0', dpd_stream_to_gmp_vector_0, '0']
-- [blocks_throttle_0, '0', dpd_stream_to_message_0, '0']
 - [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
 - [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
 - [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
 - [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
 - [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
-- [dpd_predistorter_training_0, PA_input, dpd_RLS_postdistorter_0, PA_input]
+- [dpd_predistorter_training_0, '0', dpd_RLS_postdistorter_0, '1']
 - [dpd_stream_to_gmp_vector_0, '0', dpd_predistorter_training_0, '0']
-- [dpd_stream_to_message_0, samples, dpd_gain_phase_calibrate_0, samples]
 
 metadata:
   file_format: 1
