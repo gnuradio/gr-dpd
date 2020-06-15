@@ -37,7 +37,7 @@ RLS_postdistorter::sptr RLS_postdistorter::make(const std::vector<int>& dpd_para
 RLS_postdistorter_impl::RLS_postdistorter_impl(const std::vector<int>& dpd_params,
                                                int iter_limit)
     : gr::sync_block("RLS_postdistorter",
-                     gr::io_signature::make(1, 1, sizeof(gr_complex)),
+                     gr::io_signature::make(2, 2, sizeof(gr_complex)),
                      gr::io_signature::make(0, 0, 0)),
       d_dpd_params(dpd_params),
       K_a(d_dpd_params[0]),
@@ -55,9 +55,9 @@ RLS_postdistorter_impl::RLS_postdistorter_impl(const std::vector<int>& dpd_param
     message_port_register_out(pmt::mp("taps"));
 
     // setup input message port
-    message_port_register_in(pmt::mp("PA_input"));
-    set_msg_handler(pmt::mp("PA_input"),
-                    boost::bind(&RLS_postdistorter_impl::get_PA_input, this, _1));
+    // message_port_register_in(pmt::mp("PA_input"));
+    // set_msg_handler(pmt::mp("PA_input"),
+    //                 boost::bind(&RLS_postdistorter_impl::get_PA_input, this, _1));
 
     iteration = 1;
 
@@ -125,11 +125,11 @@ RLS_postdistorter_impl::RLS_postdistorter_impl(const std::vector<int>& dpd_param
  */
 RLS_postdistorter_impl::~RLS_postdistorter_impl() {}
 
-void RLS_postdistorter_impl::get_PA_input(pmt::pmt_t P)
-{
-    d_pa_input = pmt::to_complex(P);
-    d_ack_predistorter_updated = true;
-}
+// void RLS_postdistorter_impl::get_PA_input(pmt::pmt_t P)
+// {
+//     d_pa_input = pmt::to_complex(P);
+//     d_ack_predistorter_updated = true;
+// }
 bool RLS_postdistorter_impl::almost_equal(double a, double b, double tol)
 {
     // calculate the difference
@@ -427,26 +427,32 @@ int RLS_postdistorter_impl::work(int noutput_items,
                                  gr_vector_const_void_star& input_items,
                                  gr_vector_void_star& output_items)
 {
-    const gr_complex* in = (const gr_complex*)input_items[0];
-
+    const gr_complex* in1 = (const gr_complex*)input_items[0];
+    const gr_complex* in2 = (const gr_complex*)input_items[0];
 
     // Do <+signal processing+>
     // copy private variables accessed by the asynchronous message handler block
-    pa_input = d_pa_input;
-    ack_predistorter_updated = d_ack_predistorter_updated;
-
+    // pa_input = d_pa_input;
+    // ack_predistorter_updated = d_ack_predistorter_updated;
+    pa_input = in2[0];
     for (int item = 0; item < noutput_items; item++) {
         // get number of samples consumed since the beginning of time by this block
         // from port 0
         const uint64_t nread = this->nitems_read(0);
 
-
-        if (ack_predistorter_updated) {
+        // if (ack_predistorter_updated) {
             // std::cout << "Iteration Number: " << iteration << std::endl;
 
             // extracting the PA output and arranging into a shift-structured GMP vector
             // sreg[49] = pa_output_smooth;
-            sreg[49] = in[item];
+            if (iteration == d_iter_limit) {
+                taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
+                pmt::pmt_t P_c32vector_taps = pmt::init_c64vector(M, taps);
+                message_port_pub(pmt::mp("taps"), P_c32vector_taps);
+                continue;
+            }
+
+            sreg[49] = in1[item];
             gen_GMPvector(ptr_sreg, 49, K_a, L_a + 1, K_b, M_b, L_b + 1, yy_cx_fcolvec);
             yy_cx_frowvec = yy_cx_fcolvec.st();
             for (int ii = 1; ii < sreg_len; ii++)
@@ -491,12 +497,10 @@ int RLS_postdistorter_impl::work(int noutput_items,
             message_port_pub(pmt::mp("taps"), P_c32vector_taps);
 
             iteration++;
-            if (iteration == d_iter_limit) {
-                return (-1);
-            }
+            
 
             ack_predistorter_updated = false;
-        }
+        //}
     }
     // Tell runtime system how many output items we produced.
     return noutput_items;
