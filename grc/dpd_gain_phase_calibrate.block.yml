@@ -8,9 +8,7 @@ inputs:
 - label: in
   domain: stream
   dtype: complex
-- label: samples
-  domain: message
-  id: samples
+  multiplicity: '2'
 outputs:
 - label: out
   domain: stream

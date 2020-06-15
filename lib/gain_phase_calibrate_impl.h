@@ -27,7 +27,7 @@ public:
     ~gain_phase_calibrate_impl();
 
     // Where all the action really happens
-    void set_reference(pmt::pmt_t P);
+    //void set_reference(pmt::pmt_t P);
 
     bool almost_equals_zero(double a, int num_digits);
     int general_work(int noutput_items,

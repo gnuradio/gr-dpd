@@ -25,7 +25,7 @@ gain_phase_calibrate::sptr gain_phase_calibrate::make()
  */
 gain_phase_calibrate_impl::gain_phase_calibrate_impl()
     : gr::block("gain_phase_calibrate",
-                gr::io_signature::make(1, 1, sizeof(gr_complex)),
+                gr::io_signature::make(2, 2, sizeof(gr_complex)),
                 gr::io_signature::make(1, 1, sizeof(gr_complex)))
 {
     previous_cfactor = gr_complex(0.0, 0.0);
@@ -33,22 +33,22 @@ gain_phase_calibrate_impl::gain_phase_calibrate_impl()
     d_sample = gr_complex(0.0, 0.0);
 
     // Setup input port
-    message_port_register_in(pmt::mp("samples"));
-    set_msg_handler(pmt::mp("samples"),
-                    boost::bind(&gain_phase_calibrate_impl::set_reference, this, _1));
+    // message_port_register_in(pmt::mp("samples"));
+    // set_msg_handler(pmt::mp("samples"),
+    //                 boost::bind(&gain_phase_calibrate_impl::set_reference, this, _1));
 }
 /*
  * Our virtual destructor.
  */
 gain_phase_calibrate_impl::~gain_phase_calibrate_impl() {}
 
-void gain_phase_calibrate_impl::set_reference(pmt::pmt_t P)
-{
-    d_reference_acquired = true;
+// void gain_phase_calibrate_impl::set_reference(pmt::pmt_t P)
+// {
+//     d_reference_acquired = true;
 
-    // extract reference samples from the message
-    d_sample = pmt::to_complex(P);
-}
+//     // extract reference samples from the message
+//     d_sample = pmt::to_complex(P);
+// }
 bool gain_phase_calibrate_impl::almost_equals_zero(double a, int num_digits)
 {
     // identify the first few significant digits
@@ -64,7 +64,8 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
                                             gr_vector_const_void_star& input_items,
                                             gr_vector_void_star& output_items)
 {
-    const gr_complex* in = (const gr_complex*)input_items[0];
+    const gr_complex* in1 = (const gr_complex*)input_items[0];
+    const gr_complex* in2 = (const gr_complex*)input_items[1];
     gr_complex* out = (gr_complex*)output_items[0];
 
 
@@ -72,20 +73,21 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
     item = 0;
 
     while (item < ninput_items) {
-        reference_acquired = d_reference_acquired;
-        sample = d_sample;
-        if (reference_acquired) {
+        // reference_acquired = d_reference_acquired;
+        // sample = d_sample;
+        sample = in2[item];
+        //if (reference_acquired) {
 
-            current_cfactor = sample / in[item];
+            current_cfactor = sample / in1[item];
             cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
 
-            if (!almost_equals_zero(std::real(in[item]), 5) &&
-                !almost_equals_zero(std::imag(in[item]), 5))
+            if (!almost_equals_zero(std::real(in1[item]), 5) &&
+                !almost_equals_zero(std::imag(in1[item]), 5))
                 previous_cfactor = cfactor;
 
-            out[item] = cfactor * in[item];
+            out[item] = cfactor * in1[item];
             item++;
-        }
+        //}
     }
 
     // Do <+signal processing+>
