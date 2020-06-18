@@ -428,7 +428,7 @@ int RLS_postdistorter_impl::work(int noutput_items,
                                  gr_vector_void_star& output_items)
 {
     const gr_complex* in1 = (const gr_complex*)input_items[0];
-    const gr_complex* in2 = (const gr_complex*)input_items[0];
+    const gr_complex* in2 = (const gr_complex*)input_items[1];
 
     // Do <+signal processing+>
     // copy private variables accessed by the asynchronous message handler block
