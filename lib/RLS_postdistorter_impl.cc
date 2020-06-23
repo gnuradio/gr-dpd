@@ -446,6 +446,12 @@ int RLS_postdistorter_impl::work(int noutput_items,
 
             // extracting the PA output and arranging into a shift-structured GMP vector
             // sreg[49] = pa_output_smooth;
+            if (iteration == d_iter_limit) {
+            	taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
+            	pmt::pmt_t P_c32vector_taps = pmt::init_c64vector(M, taps);
+            	message_port_pub(pmt::mp("taps"), P_c32vector_taps);
+                continue;
+            }
             sreg[49] = in[item];
             gen_GMPvector(ptr_sreg, 49, K_a, L_a + 1, K_b, M_b, L_b + 1, yy_cx_fcolvec);
             yy_cx_frowvec = yy_cx_fcolvec.st();
@@ -491,9 +497,6 @@ int RLS_postdistorter_impl::work(int noutput_items,
             message_port_pub(pmt::mp("taps"), P_c32vector_taps);
 
             iteration++;
-            if (iteration == d_iter_limit) {
-                return (-1);
-            }
 
             ack_predistorter_updated = false;
         }
