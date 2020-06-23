@@ -31,11 +31,11 @@ The blocks added to the module, so far, are:
 
 gr-dpd requires:
 
-`GNU Radio` version >= 3.8  
+`GNU Radio` version = 3.8  
 
 `Armadillo` version >= 6.7
 
-`CMake` version >= 3.11
+`CMake` version >= 3.8
 
 `gcc` version >= 7.4.0
 
