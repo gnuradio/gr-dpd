@@ -236,7 +236,7 @@ blocks:
     alias: ''
     comment: ''
     dpd_params: (1, 1, 2, 2, 2)
-    iter_limit: '10000'
+    iter_limit: '100000'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -370,7 +370,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1011, 596]
+    coordinate: [1019, 610]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2

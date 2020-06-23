@@ -186,7 +186,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.dpd_stream_to_gmp_vector_0 = dpd.stream_to_gmp_vector((1, 1, 2, 2, 2))
         self.dpd_predistorter_training_0 = dpd.predistorter_training(9)
         self.dpd_gain_phase_calibrate_0 = dpd.gain_phase_calibrate()
-        self.dpd_RLS_postdistorter_0 = dpd.RLS_postdistorter((1, 1, 2, 2, 2), 10000)
+        self.dpd_RLS_postdistorter_0 = dpd.RLS_postdistorter((1, 1, 2, 2, 2), 100000)
         self.dpd_GMP_model_PA_1 = dpd.GMP_model_PA(1, 1, 2, 2, 2, 0)
         self.dpd_GMP_model_PA_0 = dpd.GMP_model_PA(1, 1, 2, 2, 2, 0)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)

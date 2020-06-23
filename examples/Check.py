@@ -7,7 +7,7 @@
 # GNU Radio Python Flow Graph
 # Title: Non-linear_Two_Tone_Setup
 # Author: Alekh Gupta
-# GNU Radio version: 3.9.0.0-git
+# GNU Radio version: 3.8.1.0
 
 from distutils.version import StrictVersion
 
@@ -41,7 +41,7 @@ from gnuradio import qtgui
 class Check(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Non-linear_Two_Tone_Setup", catch_exceptions=True)
+        gr.top_block.__init__(self, "Non-linear_Two_Tone_Setup")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Non-linear_Two_Tone_Setup")
         qtgui.util.check_set_qss()
