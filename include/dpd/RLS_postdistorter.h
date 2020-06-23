@@ -22,7 +22,7 @@ namespace dpd {
 class DPD_API RLS_postdistorter : virtual public gr::sync_block
 {
 public:
-    typedef std::shared_ptr<RLS_postdistorter> sptr;
+    typedef boost::shared_ptr<RLS_postdistorter> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::RLS_postdistorter.

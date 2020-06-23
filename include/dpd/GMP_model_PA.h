@@ -22,7 +22,7 @@ namespace dpd {
 class DPD_API GMP_model_PA : virtual public gr::sync_block
 {
 public:
-    typedef std::shared_ptr<GMP_model_PA> sptr;
+    typedef boost::shared_ptr<GMP_model_PA> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::GMP_model_PA.

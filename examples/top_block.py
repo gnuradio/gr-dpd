@@ -7,7 +7,7 @@
 # GNU Radio Python Flow Graph
 # Title: Top Block
 # Author: alekh
-# GNU Radio version: 3.9.0.0-git
+# GNU Radio version: 3.8.1.0
 
 from distutils.version import StrictVersion
 
@@ -41,7 +41,7 @@ from gnuradio import qtgui
 class top_block(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Top Block", catch_exceptions=True)
+        gr.top_block.__init__(self, "Top Block")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Top Block")
         qtgui.util.check_set_qss()
@@ -183,7 +183,6 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.dpd_stream_to_message_0 = dpd.stream_to_message()
         self.dpd_stream_to_gmp_vector_0 = dpd.stream_to_gmp_vector((1, 1, 2, 2, 2))
         self.dpd_predistorter_training_0 = dpd.predistorter_training(9)
         self.dpd_gain_phase_calibrate_0 = dpd.gain_phase_calibrate()
@@ -203,14 +202,13 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.dpd_RLS_postdistorter_0, 'taps'), (self.dpd_predistorter_training_0, 'taps'))
         self.msg_connect((self.dpd_predistorter_training_0, 'PA_input'), (self.dpd_RLS_postdistorter_0, 'PA_input'))
-        self.msg_connect((self.dpd_stream_to_message_0, 'samples'), (self.dpd_gain_phase_calibrate_0, 'samples'))
         self.connect((self.analog_fastnoise_source_x_0, 0), (self.blocks_add_xx_0, 2))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.analog_sig_source_x_1, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.dpd_GMP_model_PA_1, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.dpd_gain_phase_calibrate_0, 1))
         self.connect((self.blocks_throttle_0, 0), (self.dpd_stream_to_gmp_vector_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.dpd_stream_to_message_0, 0))
         self.connect((self.dpd_GMP_model_PA_0, 0), (self.dpd_gain_phase_calibrate_0, 0))
         self.connect((self.dpd_GMP_model_PA_0, 0), (self.qtgui_freq_sink_x_2, 0))
         self.connect((self.dpd_GMP_model_PA_1, 0), (self.qtgui_freq_sink_x_1, 0))

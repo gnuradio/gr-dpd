@@ -1,7 +1,6 @@
 options:
   parameters:
     author: alekh
-    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -23,6 +22,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: ''
+    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -258,7 +258,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1276, 241]
+    coordinate: [1307, 422]
     rotation: 180
     state: true
 - name: dpd_predistorter_training_0
@@ -291,21 +291,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [706, 282]
-    rotation: 0
-    state: true
-- name: dpd_stream_to_message_0
-  id: dpd_stream_to_message
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1363, 464]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1
@@ -475,8 +460,8 @@ connections:
 - [analog_sig_source_x_1, '0', blocks_add_xx_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
 - [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [blocks_throttle_0, '0', dpd_stream_to_gmp_vector_0, '0']
-- [blocks_throttle_0, '0', dpd_stream_to_message_0, '0']
 - [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
 - [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
 - [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
@@ -485,7 +470,6 @@ connections:
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
 - [dpd_predistorter_training_0, PA_input, dpd_RLS_postdistorter_0, PA_input]
 - [dpd_stream_to_gmp_vector_0, '0', dpd_predistorter_training_0, '0']
-- [dpd_stream_to_message_0, samples, dpd_gain_phase_calibrate_0, samples]
 
 metadata:
   file_format: 1
