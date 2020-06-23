@@ -22,7 +22,7 @@ namespace dpd {
 class DPD_API stream_to_message : virtual public gr::sync_block
 {
 public:
-    typedef std::shared_ptr<stream_to_message> sptr;
+    typedef boost::shared_ptr<stream_to_message> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::stream_to_message.

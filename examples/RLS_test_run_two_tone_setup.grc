@@ -1,7 +1,6 @@
 options:
   parameters:
     author: alekh
-    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -23,6 +22,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: ''
+    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -236,7 +236,7 @@ blocks:
     alias: ''
     comment: ''
     dpd_params: (1, 1, 2, 2, 2)
-    iter_limit: '1000'
+    iter_limit: '2000'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:

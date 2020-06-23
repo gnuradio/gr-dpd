@@ -22,7 +22,7 @@ namespace dpd {
 class DPD_API gain_phase_calibrate : virtual public gr::block
 {
 public:
-    typedef std::shared_ptr<gain_phase_calibrate> sptr;
+    typedef boost::shared_ptr<gain_phase_calibrate> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::gain_phase_calibrate.

@@ -22,7 +22,7 @@ namespace dpd {
 class DPD_API predistorter_training : virtual public gr::sync_block
 {
 public:
-    typedef std::shared_ptr<predistorter_training> sptr;
+    typedef boost::shared_ptr<predistorter_training> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::predistorter_training.

@@ -37,7 +37,7 @@ namespace dpd {
 class DPD_API MP_model_PA : virtual public gr::sync_block
 {
 public:
-    typedef std::shared_ptr<MP_model_PA> sptr;
+    typedef boost::shared_ptr<MP_model_PA> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of dpd::MP_model_PA.
