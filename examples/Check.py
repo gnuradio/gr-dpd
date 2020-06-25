@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: Non-linear_Two_Tone_Setup
+# Title: Non-linear_Single_Tone_Setup
 # Author: Alekh Gupta
 # GNU Radio version: 3.8.1.0
 
@@ -42,9 +42,9 @@ from gnuradio import qtgui
 class Check(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Non-linear_Two_Tone_Setup")
+        gr.top_block.__init__(self, "Non-linear_Single_Tone_Setup")
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("Non-linear_Two_Tone_Setup")
+        self.setWindowTitle("Non-linear_Single_Tone_Setup")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -76,17 +76,17 @@ class Check(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 32000
-        self.phase = phase = 90
+        self.freq = freq = 1000
         self.amplitude = amplitude = 2
 
         ##################################################
         # Blocks
         ##################################################
-        self._phase_range = Range(-180, 180, 1, 90, 200)
-        self._phase_win = RangeWidget(self._phase_range, self.set_phase, 'Phase Shift', "counter_slider", float)
-        self.top_grid_layout.addWidget(self._phase_win)
+        self._freq_range = Range(0, 10000, 100, 1000, 100)
+        self._freq_win = RangeWidget(self._freq_range, self.set_freq, 'Frequency', "counter_slider", float)
+        self.top_grid_layout.addWidget(self._freq_win)
         self._amplitude_range = Range(0, 10, 0.1, 2, 200)
-        self._amplitude_win = RangeWidget(self._amplitude_range, self.set_amplitude, 'Amplitude Shift', "counter_slider", float)
+        self._amplitude_win = RangeWidget(self._amplitude_range, self.set_amplitude, 'Amplitude', "counter_slider", float)
         self.top_grid_layout.addWidget(self._amplitude_win)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
             1024, #size
@@ -139,9 +139,9 @@ class Check(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win)
         self.dpd_gain_phase_calibrate_0 = dpd.gain_phase_calibrate()
+        self.dpd_GMP_model_PA_0 = dpd.GMP_model_PA(2, 2, 2, 2, 2, 0)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_cc(amplitude*numpy.exp(1j*phase))
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1000, 1, 0, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, amplitude, 0, 0)
 
 
 
@@ -149,11 +149,11 @@ class Check(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.dpd_gain_phase_calibrate_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.qtgui_time_sink_x_0, 1))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.dpd_GMP_model_PA_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.dpd_gain_phase_calibrate_0, 1))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.dpd_GMP_model_PA_0, 0), (self.dpd_gain_phase_calibrate_0, 0))
+        self.connect((self.dpd_GMP_model_PA_0, 0), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.dpd_gain_phase_calibrate_0, 0), (self.qtgui_time_sink_x_0, 2))
 
 
@@ -171,19 +171,19 @@ class Check(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
 
-    def get_phase(self):
-        return self.phase
+    def get_freq(self):
+        return self.freq
 
-    def set_phase(self, phase):
-        self.phase = phase
-        self.blocks_multiply_const_vxx_0.set_k(self.amplitude*numpy.exp(1j*self.phase))
+    def set_freq(self, freq):
+        self.freq = freq
+        self.analog_sig_source_x_0.set_frequency(self.freq)
 
     def get_amplitude(self):
         return self.amplitude
 
     def set_amplitude(self, amplitude):
         self.amplitude = amplitude
-        self.blocks_multiply_const_vxx_0.set_k(self.amplitude*numpy.exp(1j*self.phase))
+        self.analog_sig_source_x_0.set_amplitude(self.amplitude)
 
 
 

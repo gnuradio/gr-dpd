@@ -37,7 +37,7 @@ blocks:
   parameters:
     comment: ''
     gui_hint: ''
-    label: Amplitude Shift
+    label: Amplitude
     min_len: '200'
     orient: Qt.Horizontal
     rangeType: float
@@ -53,19 +53,19 @@ blocks:
     coordinate: [325, 19]
     rotation: 0
     state: true
-- name: phase
+- name: freq
   id: variable_qtgui_range
   parameters:
     comment: ''
     gui_hint: ''
-    label: Phase Shift
-    min_len: '200'
+    label: Frequency
+    min_len: '100'
     orient: Qt.Horizontal
     rangeType: float
-    start: '-180'
-    step: '1'
-    stop: '180'
-    value: '90'
+    start: '0'
+    step: '100'
+    stop: '10000'
+    value: '1000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -91,9 +91,9 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '1'
+    amp: amplitude
     comment: ''
-    freq: '1000'
+    freq: freq
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -106,24 +106,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [48, 309]
-    rotation: 0
-    state: true
-- name: blocks_multiply_const_vxx_0
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: amplitude*numpy.exp(1j*phase)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [595, 379]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -145,6 +127,27 @@ blocks:
     coordinate: [280, 349]
     rotation: 0
     state: true
+- name: dpd_GMP_model_PA_0
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: '0'
+    model_param1: '2'
+    model_param2: '2'
+    model_param3: '2'
+    model_param4: '2'
+    model_param5: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [651, 398]
+    rotation: 0
+    state: true
 - name: dpd_gain_phase_calibrate_0
   id: dpd_gain_phase_calibrate
   parameters:
@@ -157,7 +160,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [820, 487]
+    coordinate: [877, 627]
     rotation: 0
     state: enabled
 - name: import_0
@@ -267,17 +270,17 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1057, 354]
+    coordinate: [1127, 352]
     rotation: 0
     state: true
 
 connections:
 - [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
-- [blocks_multiply_const_vxx_0, '0', dpd_gain_phase_calibrate_0, '0']
-- [blocks_multiply_const_vxx_0, '0', qtgui_time_sink_x_0, '1']
-- [blocks_throttle_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_throttle_0, '0', dpd_GMP_model_PA_0, '0']
 - [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [blocks_throttle_0, '0', qtgui_time_sink_x_0, '0']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_0, '0', qtgui_time_sink_x_0, '1']
 - [dpd_gain_phase_calibrate_0, '0', qtgui_time_sink_x_0, '2']
 
 metadata:
