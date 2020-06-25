@@ -77,7 +77,12 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
         // sample = d_sample;
         sample = in2[item];
         //if (reference_acquired) {
-
+            if(previous_cfactor != gr_complex(0.0, 0.0))
+            {
+                cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
+            }
+            else
+                cfactor = current_cfactor;
             current_cfactor = sample / in1[item];
             cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
 
