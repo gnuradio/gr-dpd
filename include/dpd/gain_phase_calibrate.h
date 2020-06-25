@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2020 gr-dpd author.
+ * Copyright 2020 Alekh Gupta
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
