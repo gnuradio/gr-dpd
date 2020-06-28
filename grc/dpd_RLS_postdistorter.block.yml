@@ -15,7 +15,9 @@ inputs:
 - label: in
   domain: stream
   dtype: complex
-  multiplicity: '2'
+- label: PA_Input
+  domain: stream
+  dtype: complex
 outputs:
 - label: taps
   domain: message
