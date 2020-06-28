@@ -5,10 +5,12 @@ templates:
   imports: import dpd
   make: dpd.gain_phase_calibrate()
 inputs:
-- label: in
+- label: PA Output
   domain: stream
   dtype: complex
-  multiplicity: '2'
+- label: Input Sample
+  domain: stream
+  dtype: complex
 outputs:
 - label: out
   domain: stream
