@@ -9,7 +9,7 @@ parameters:
   label: M
   dtype: int
 inputs:
-- label: in
+- label: Input vector
   domain: stream
   dtype: complex
   vlen: ${ M }
