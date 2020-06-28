@@ -9,7 +9,7 @@ parameters:
   label: M
   dtype: int
 inputs:
-- label: in
+- label: Input vector
   domain: stream
   dtype: complex
   vlen: ${ M }
@@ -17,7 +17,7 @@ inputs:
   domain: message
   id: taps
 outputs:
-- label: out
+- label: Out/ PA_Input
   domain: stream
   dtype: complex
 file_format: 1
