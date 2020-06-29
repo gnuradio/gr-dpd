@@ -192,15 +192,17 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
+    mode: Both
     model_param1: '1'
     model_param2: '1'
-    model_param3: '2'
-    model_param4: '2'
-    model_param5: '2'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -213,15 +215,17 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
+    mode: Both
     model_param1: '1'
     model_param2: '1'
-    model_param3: '2'
-    model_param4: '2'
-    model_param5: '2'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -235,7 +239,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: (1, 1, 2, 2, 2)
+    dpd_params: (1, 1, 1,1, 1)
     iter_limit: '100000'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -243,7 +247,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1005, 258]
+    coordinate: [999, 258]
     rotation: 180
     state: true
 - name: dpd_gain_phase_calibrate_0
@@ -258,13 +262,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1307, 422]
+    coordinate: [1308, 459]
     rotation: 180
     state: true
 - name: dpd_predistorter_training_0
   id: dpd_predistorter_training
   parameters:
-    M: '9'
+    M: '2'
     affinity: ''
     alias: ''
     comment: ''
@@ -274,7 +278,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [983, 101]
+    coordinate: [1005, 100]
     rotation: 0
     state: true
 - name: dpd_stream_to_gmp_vector_0
@@ -283,14 +287,14 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: (1, 1, 2, 2, 2)
+    dpd_params: (1, 1, 1,1,1)
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [706, 282]
+    coordinate: [690, 282]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1
@@ -460,9 +464,9 @@ connections:
 - [analog_sig_source_x_1, '0', blocks_add_xx_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
 - [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
-- [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
+- [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '0']
 - [blocks_throttle_0, '0', dpd_stream_to_gmp_vector_0, '0']
-- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
 - [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
 - [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
