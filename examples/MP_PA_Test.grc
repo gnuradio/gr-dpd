@@ -1,7 +1,6 @@
 options:
   parameters:
     author: Alekh Gupta
-    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -23,6 +22,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: Non-linear_Two_Tone_Setup
+    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -190,9 +190,10 @@ blocks:
 - name: dpd_MP_model_PA_0
   id: dpd_MP_model_PA
   parameters:
-    Mem_Depth: '3'
-    Mode: '1'
-    Order: '4'
+    Coeff: (1,0,1,1)
+    Mem_Depth: '2'
+    Mode: Odd
+    Order: '2'
     affinity: ''
     alias: ''
     comment: ''
