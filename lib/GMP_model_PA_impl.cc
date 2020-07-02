@@ -195,8 +195,8 @@ int GMP_model_PA_impl::work(int noutput_items,
                   continue;
                 else if((k % 2) && Mode_vl == 1)
                   continue; 
-                int L_st = (m * L_b * K_b) + (K_a * L_a) + k * L_a;
-                int L_en = (m * L_b * K_b) + (K_a * L_a) + (k + 1) * L_a;
+                int L_st = (m * L_b * K_b) + (K_a * L_a) + k * L_b;
+                int L_en = (m * L_b * K_b) + (K_a * L_a) + (k + 1) * L_b;
                 for (int l = L_st; l < L_en; l++) {
                     gr_complex a = GMP_vector(l);
                     gr_complex b = coeff2(k, m, l - L_st);
