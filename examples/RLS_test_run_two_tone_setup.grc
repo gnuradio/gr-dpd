@@ -195,12 +195,12 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
+    mode: '2'
     model_param1: '1'
     model_param2: '1'
-    model_param3: '2'
-    model_param4: '2'
-    model_param5: '2'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -216,12 +216,12 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
+    mode: '2'
     model_param1: '1'
     model_param2: '1'
-    model_param3: '2'
-    model_param4: '2'
-    model_param5: '2'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
   states:
     bus_sink: false
     bus_source: false
