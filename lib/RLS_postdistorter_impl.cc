@@ -434,7 +434,6 @@ int RLS_postdistorter_impl::work(int noutput_items,
     // copy private variables accessed by the asynchronous message handler block
     // pa_input = d_pa_input;
     // ack_predistorter_updated = d_ack_predistorter_updated;
-    pa_input = in2[0];
     for (int item = 0; item < noutput_items; item++) {
         // get number of samples consumed since the beginning of time by this block
         // from port 0
@@ -451,7 +450,7 @@ int RLS_postdistorter_impl::work(int noutput_items,
                 message_port_pub(pmt::mp("taps"), P_c32vector_taps);
                 continue;
             }
-
+            pa_input = in2[item];
             sreg[49] = in1[item];
             gen_GMPvector(ptr_sreg, 49, K_a, L_a + 1, K_b, M_b, L_b + 1, yy_cx_fcolvec);
             yy_cx_frowvec = yy_cx_fcolvec.st();
