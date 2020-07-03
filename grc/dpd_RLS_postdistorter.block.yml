@@ -6,18 +6,18 @@ templates:
   make: dpd.RLS_postdistorter(${dpd_params}, ${iter_limit})
 parameters:
 - id: dpd_params
-  label: Dpd_params
+  label: Dpd_Params
   dtype: int_vector
 - id: iter_limit
-  label: Iter_limit
+  label: Iteration_limit
   dtype: int
 inputs:
 - label: in
   domain: stream
   dtype: complex
-- label: PA_input
-  domain: message
-  id: PA_input
+- label: PA_Input
+  domain: stream
+  dtype: complex
 outputs:
 - label: taps
   domain: message

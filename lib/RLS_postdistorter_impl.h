@@ -43,7 +43,7 @@ public:
     RLS_postdistorter_impl(const std::vector<int>& dpd_params, int iter_limit);
     ~RLS_postdistorter_impl();
 
-    void get_PA_input(pmt::pmt_t P);
+    //void get_PA_input(pmt::pmt_t P);
     bool almost_equal(double a, double b, double tol);
     void givens_rotate(const cx_mat& in, cx_mat& out);
     void hgivens_rotate(const cx_mat& in, cx_mat& out);

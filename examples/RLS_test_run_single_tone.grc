@@ -51,7 +51,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [57, 359]
+    coordinate: [70, 359]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_0
@@ -228,7 +228,7 @@ connections:
 - [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
 - [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
-- [dpd_predistorter_training_0, PA_input, dpd_RLS_postdistorter_0, PA_input]
+- [dpd_predistorter_training_0, '0', dpd_RLS_postdistorter_0, '1']
 - [dpd_stream_to_gmp_vector_0, '0', dpd_predistorter_training_0, '0']
 
 metadata:

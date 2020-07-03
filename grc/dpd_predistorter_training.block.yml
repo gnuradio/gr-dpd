@@ -17,10 +17,7 @@ inputs:
   domain: message
   id: taps
 outputs:
-- label: out
+- label: Out/ PA_Input
   domain: stream
   dtype: complex
-- label: PA_input
-  domain: message
-  id: PA_input
 file_format: 1
