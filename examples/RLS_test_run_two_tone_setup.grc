@@ -197,7 +197,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: Both
+    mode: Odd
     model_param1: '1'
     model_param2: '1'
     model_param3: '1'
@@ -207,7 +207,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1296, 19]
+    coordinate: [1297, 18]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_1
@@ -220,7 +220,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: Both
+    mode: Odd
     model_param1: '1'
     model_param2: '1'
     model_param3: '1'
@@ -230,7 +230,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 572]
+    coordinate: [661, 656]
     rotation: 0
     state: true
 - name: dpd_RLS_postdistorter_0
@@ -240,7 +240,7 @@ blocks:
     alias: ''
     comment: ''
     dpd_params: (1, 1, 2, 2, 2)
-    iter_limit: '2000'
+    iter_limit: '10000'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -268,7 +268,7 @@ blocks:
 - name: dpd_predistorter_training_0
   id: dpd_predistorter_training
   parameters:
-    M: '2'
+    M: '9'
     affinity: ''
     alias: ''
     comment: ''
@@ -278,7 +278,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [949, 89]
+    coordinate: [951, 89]
     rotation: 0
     state: true
 - name: dpd_stream_to_gmp_vector_0
@@ -287,14 +287,14 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: (1, 1, 1,1,1)
+    dpd_params: (1, 1, 2, 2, 2)
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [652, 262]
+    coordinate: [641, 251]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1

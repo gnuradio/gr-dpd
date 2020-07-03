@@ -51,7 +51,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [70, 359]
+    coordinate: [44, 349]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_0
@@ -59,20 +59,22 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
+    mode: Both
     model_param1: '1'
     model_param2: '1'
-    model_param3: '2'
-    model_param4: '2'
-    model_param5: '2'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [865, 20]
+    coordinate: [907, 31]
     rotation: 0
     state: true
 - name: dpd_RLS_postdistorter_0
@@ -104,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [840, 377]
+    coordinate: [909, 357]
     rotation: 180
     state: true
 - name: dpd_predistorter_training_0
@@ -136,7 +138,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [311, 93]
+    coordinate: [276, 104]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -216,7 +218,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1170, 176]
+    coordinate: [1201, 176]
     rotation: 0
     state: true
 
