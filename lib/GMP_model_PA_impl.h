@@ -27,20 +27,26 @@ private:
     int M_b;
     int L_b;
     int M; // No. of Coefficients
-    int Mode_vl;
+    std::string Mode_vl;
+    cx_fmat coeff_1;
+    cx_fcube coeff_2;
 public:
     GMP_model_PA_impl(int model_param1,
                       int model_param2,
                       int model_param3,
                       int model_param4,
                       int model_param5,
-                      int mode);
+                      std::string mode,
+                      const std::vector <gr_complex> &coeff1,
+                      const std::vector <gr_complex> &coeff2);
     ~GMP_model_PA_impl();
 
     // Where all the action really happens
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,
              gr_vector_void_star& output_items);
+
+    void initialise_Coefficients(const std::vector <gr_complex> &coeff1, const std::vector <gr_complex> &coeff2);
     void gen_GMP_vector(const gr_complex* const in,
                         int item,
                         int K_a,

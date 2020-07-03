@@ -496,7 +496,7 @@ int RLS_postdistorter_impl::work(int noutput_items,
             message_port_pub(pmt::mp("taps"), P_c32vector_taps);
 
             iteration++;
-            
+
 
             ack_predistorter_updated = false;
         //}

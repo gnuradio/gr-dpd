@@ -18,44 +18,44 @@
 using std::vector;
 using namespace arma;
 
-cx_fmat coeff = {
-    { { 0.9295, -0.0001 },
-      { 0.2939, 0.0005 },
-      { -0.1270, 0.0034 },
-      { 0.0741, 0.0018 } }, // 1st order coeffs
-    { { 0.9295, -0.0001 }, { 0.2939, 0.0005 }, { -0.1270, 0.0034 }, { 0.0741, 0.0018 } },
-    { { 0.1419, -0.0008 },
-      { -0.0735, 0.0833 },
-      { -0.0535, 0.0004 },
-      { 0.0908, -0.0473 } }, // 3rd order coeffs
-    { { 0.1419, -0.0008 },
-      { -0.0735, 0.0833 },
-      { -0.0535, 0.0004 },
-      { 0.0908, -0.0473 } },
-    { { 0.0084, -0.0569 },
-      { -0.4610, 0.0274 },
-      { -0.3011, -0.1403 },
-      { -0.0623, -0.0269 } }, // 5th order coeffs
-    { { 0.0084, -0.0569 },
-      { -0.4610, 0.0274 },
-      { -0.3011, -0.1403 },
-      { -0.0623, -0.0269 } },
-    { { 0.1774, 0.0265 }, { 0.0848, 0.0613 }, { -0.0362, -0.0307 }, { 0.0415, 0.0429 } }
-}; // 7th order coeffs
+// cx_fmat coeff = {
+//     { { 0.9295, -0.0001 },
+//       { 0.2939, 0.0005 },
+//       { -0.1270, 0.0034 },
+//       { 0.0741, 0.0018 } }, // 1st order coeffs
+//     { { 0.9295, -0.0001 }, { 0.2939, 0.0005 }, { -0.1270, 0.0034 }, { 0.0741, 0.0018 } },
+//     { { 0.1419, -0.0008 },
+//       { -0.0735, 0.0833 },
+//       { -0.0535, 0.0004 },
+//       { 0.0908, -0.0473 } }, // 3rd order coeffs
+//     { { 0.1419, -0.0008 },
+//       { -0.0735, 0.0833 },
+//       { -0.0535, 0.0004 },
+//       { 0.0908, -0.0473 } },
+//     { { 0.0084, -0.0569 },
+//       { -0.4610, 0.0274 },
+//       { -0.3011, -0.1403 },
+//       { -0.0623, -0.0269 } }, // 5th order coeffs
+//     { { 0.0084, -0.0569 },
+//       { -0.4610, 0.0274 },
+//       { -0.3011, -0.1403 },
+//       { -0.0623, -0.0269 } },
+//     { { 0.1774, 0.0265 }, { 0.0848, 0.0613 }, { -0.0362, -0.0307 }, { 0.0415, 0.0429 } }
+// }; // 7th order coeffs
 
 namespace gr {
 namespace dpd {
 
-MP_model_PA::sptr MP_model_PA::make(int Order, int Mem_Depth, int Mode)
+MP_model_PA::sptr MP_model_PA::make(int Order, int Mem_Depth, std::string Mode, const std::vector <gr_complex> &Coeff)
 {
-    return gnuradio::get_initial_sptr(new MP_model_PA_impl(Order, Mem_Depth, Mode));
+    return gnuradio::get_initial_sptr(new MP_model_PA_impl(Order, Mem_Depth, Mode, Coeff));
 }
 
 
 /*
  * The private constructor
  */
-MP_model_PA_impl::MP_model_PA_impl(int Order, int Mem_Depth, int Mode)
+MP_model_PA_impl::MP_model_PA_impl(int Order, int Mem_Depth, std::string Mode, const std::vector <gr_complex> &Coeff)
     : gr::sync_block("MP_model_PA",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
@@ -64,12 +64,30 @@ MP_model_PA_impl::MP_model_PA_impl(int Order, int Mem_Depth, int Mode)
       Mode_val(Mode)
 {
     set_history(L_a);
+    coeff = cx_fmat(K_a, L_a, fill::zeros);
+    initialise_Coefficients(Coeff);
 }
 
 /*
  * Our virtual destructor.
  */
 MP_model_PA_impl::~MP_model_PA_impl() {}
+
+void MP_model_PA_impl::initialise_Coefficients(const std::vector <gr_complex> &Coeff)
+{
+	int inx = 0;
+
+	// Initialise coefficients of signal-and-aligned envelope
+	for(int i = 0; i < K_a; i++)
+	{
+		for(int j = 0; j < L_a; j++)
+		{
+			coeff(i, j) = Coeff[inx];
+			inx++;
+			//std::cout << coeff_1(i, j) << "\n";
+		}
+	}
+}
 
 void MP_model_PA_impl::gen_MP_vector(
     const gr_complex* in, int item, int K_a, int L_a, cx_fcolvec& MP_vector)
@@ -115,9 +133,9 @@ int MP_model_PA_impl::work(int noutput_items,
         for (int K = 0; K < K_a; K++) {
             int L_st = (K * L_a);
             int L_en = ((K + 1) * L_a);
-            if((K % 2) == 0 && Mode_val == 1)
+            if((K % 2) == 0 && Mode_val == "Even")
             	continue;
-            else if((K % 2) && Mode_val == 2)
+            else if((K % 2) && Mode_val == "Odd")
             	continue;
             for (int L = L_st; L < L_en; L++) {
                 gr_complex a = MP_vector(L);

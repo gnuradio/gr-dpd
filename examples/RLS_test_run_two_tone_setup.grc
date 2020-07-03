@@ -192,10 +192,12 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '2'
+    mode: Both
     model_param1: '1'
     model_param2: '1'
     model_param3: '1'
@@ -213,10 +215,12 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '2'
+    mode: Both
     model_param1: '1'
     model_param2: '1'
     model_param3: '1'
@@ -264,7 +268,7 @@ blocks:
 - name: dpd_predistorter_training_0
   id: dpd_predistorter_training
   parameters:
-    M: '9'
+    M: '2'
     affinity: ''
     alias: ''
     comment: ''
@@ -283,7 +287,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: (1, 1, 2, 2, 2)
+    dpd_params: (1, 1, 1,1,1)
     maxoutbuf: '0'
     minoutbuf: '0'
   states:

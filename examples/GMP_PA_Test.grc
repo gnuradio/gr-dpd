@@ -1,7 +1,6 @@
 options:
   parameters:
     author: Alekh Gupta
-    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -23,6 +22,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: Non-linear_Two_Tone_Setup
+    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -192,12 +192,14 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1, 0,1,1)
+    coeff2: (1+1j)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    mode: '0'
-    model_param1: '1'
-    model_param2: '1'
+    mode: Odd
+    model_param1: '2'
+    model_param2: '2'
     model_param3: '1'
     model_param4: '1'
     model_param5: '1'
@@ -205,7 +207,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [705, 342]
+    coordinate: [692, 330]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -285,7 +287,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [933, 334]
+    coordinate: [1056, 375]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1

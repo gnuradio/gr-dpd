@@ -37,7 +37,9 @@ public:
                      int model_param3,
                      int model_param4,
                      int model_param5,
-                     int mode);
+                     std::string mode,
+                     const std::vector <gr_complex> &coeff1,
+                     const std::vector <gr_complex> &coeff2);
 };
 
 } // namespace dpd

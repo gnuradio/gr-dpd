@@ -23,15 +23,17 @@ class MP_model_PA_impl : public MP_model_PA
 private:
     int K_a; // No. of channels or order of PA model
     int L_a; // No. of taps or memory-depth
-    int Mode_val; 
+    std::string Mode_val; 
+    cx_fmat coeff;
 public:
-    MP_model_PA_impl(int Order, int Mem_Depth, int Mode);
+    MP_model_PA_impl(int Order, int Mem_Depth, std::string Mode, const std::vector <gr_complex> &Coeff);
     ~MP_model_PA_impl();
 
     // Where all the action really happens
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,
              gr_vector_void_star& output_items);
+    void initialise_Coefficients(const std::vector <gr_complex> &Coeff);
     void gen_MP_vector(
         const gr_complex* in, int item, int K_a, int L_a, cx_fcolvec& MP_vector);
 };

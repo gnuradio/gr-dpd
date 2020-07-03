@@ -84,6 +84,7 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
             }
             else
                 cfactor = current_cfactor;
+
             // cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
 
             if (!almost_equals_zero(std::real(in1[item]), 5) &&
