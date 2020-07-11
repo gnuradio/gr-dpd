@@ -8,9 +8,11 @@ parameters:
 - id: Order
   label: Order
   dtype: int
+  default: 1
 - id: Mem_Depth
-  label: Mem_depth
+  label: Memory Depth
   dtype: int
+  default: 1
 - id: Mode
   label: Mode of Operation
   dtype: string
@@ -20,6 +22,7 @@ parameters:
 - id: Coeff
   label: Coeff. Vector (K_a x L_a)
   dtype: complex_vector
+  default: (1)
   hide: 'part'
 inputs:
 - label: in

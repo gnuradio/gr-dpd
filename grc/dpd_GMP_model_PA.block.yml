@@ -9,18 +9,23 @@ parameters:
 - id: model_param1
   label: Model_param1 (K_a)
   dtype: int
+  default: 1
 - id: model_param2
   label: Model_param2 (L_a)
   dtype: int
+  default: 1
 - id: model_param3
   label: Model_param3 (K_b)
   dtype: int
+  default: 1
 - id: model_param4
   label: Model_param4 (M_b)
   dtype: int
+  default: 1
 - id: model_param5
   label: Model_param5 (L_b)
   dtype: int
+  default: 1
 - id: mode
   label: Mode of Operation
   dtype: string
@@ -31,10 +36,12 @@ parameters:
   label: Coeff. Vector I (K_a x L_a)
   dtype: complex_vector
   hide: 'part'
+  default: (1)
 - id: coeff2
   label: Coeff. Vector II (K_b x M_b x L_b)
   dtype: complex_vector
   hide: 'part'
+  default: (1)
 inputs:
 - label: in
   domain: stream

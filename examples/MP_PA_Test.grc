@@ -187,13 +187,13 @@ blocks:
     coordinate: [468, 320]
     rotation: 0
     state: true
-- name: dpd_MP_model_PA_0
+- name: dpd_MP_model_PA_1
   id: dpd_MP_model_PA
   parameters:
-    Coeff: (1,0,1,1)
-    Mem_Depth: '2'
-    Mode: Odd
-    Order: '2'
+    Coeff: (1)
+    Mem_Depth: '1'
+    Mode: Both
+    Order: '1'
     affinity: ''
     alias: ''
     comment: ''
@@ -203,7 +203,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [681, 380]
+    coordinate: [684, 364]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -372,9 +372,9 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_add_xx_0, '0']
 - [analog_sig_source_x_1, '0', blocks_add_xx_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
-- [blocks_throttle_0, '0', dpd_MP_model_PA_0, '0']
+- [blocks_throttle_0, '0', dpd_MP_model_PA_1, '0']
 - [blocks_throttle_0, '0', qtgui_freq_sink_x_1, '0']
-- [dpd_MP_model_PA_0, '0', qtgui_freq_sink_x_0, '0']
+- [dpd_MP_model_PA_1, '0', qtgui_freq_sink_x_0, '0']
 
 metadata:
   file_format: 1

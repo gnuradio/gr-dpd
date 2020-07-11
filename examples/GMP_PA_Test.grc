@@ -187,19 +187,19 @@ blocks:
     coordinate: [468, 320]
     rotation: 0
     state: true
-- name: dpd_GMP_model_PA_1
+- name: dpd_GMP_model_PA_0
   id: dpd_GMP_model_PA
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1, 0,1,1)
-    coeff2: (1+1j)
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: Odd
-    model_param1: '2'
-    model_param2: '2'
+    model_param1: '1'
+    model_param2: '1'
     model_param3: '1'
     model_param4: '1'
     model_param5: '1'
@@ -207,7 +207,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [692, 330]
+    coordinate: [731, 368]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -376,9 +376,9 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_add_xx_0, '0']
 - [analog_sig_source_x_1, '0', blocks_add_xx_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
-- [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_throttle_0, '0', dpd_GMP_model_PA_0, '0']
 - [blocks_throttle_0, '0', qtgui_freq_sink_x_1, '0']
-- [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_0, '0']
+- [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_0, '0']
 
 metadata:
   file_format: 1
