@@ -3,16 +3,15 @@ label: Predistorter training block
 category: '[Dpd]'
 templates:
   imports: import dpd
-  make: dpd.predistorter_training(${M})
+  make: dpd.predistorter_training(${dpd_params})
 parameters:
-- id: M
-  label: M
-  dtype: int
+- id: dpd_params
+  label: Dpd_params
+  dtype: int_vector
 inputs:
 - label: Input vector
   domain: stream
   dtype: complex
-  vlen: ${ M }
 - label: taps
   domain: message
   id: taps
