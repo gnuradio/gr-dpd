@@ -26,6 +26,7 @@ The blocks added to the module, so far, are:
 * *predistorter_training*
 * *RLS_postdistorter*
 * *gain_phase_calibrate*
+* *LMS_postdistorter*
 
 ## Dependencies:
 
