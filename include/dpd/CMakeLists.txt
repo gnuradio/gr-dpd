@@ -17,5 +17,6 @@ install(FILES
     RLS_postdistorter.h
     stream_to_gmp_vector.h
     gain_phase_calibrate.h
-    stream_to_message.h DESTINATION include/dpd
+    stream_to_message.h
+    LMS_postdistorter.h DESTINATION include/dpd
 )

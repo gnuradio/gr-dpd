@@ -37,3 +37,4 @@ GR_ADD_TEST(qa_RLS_postdistorter ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR
 GR_ADD_TEST(qa_stream_to_gmp_vector ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_stream_to_gmp_vector.py)
 GR_ADD_TEST(qa_gain_phase_calibrate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_gain_phase_calibrate.py)
 GR_ADD_TEST(qa_stream_to_message ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_stream_to_message.py)
+GR_ADD_TEST(qa_LMS_postdistorter ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_LMS_postdistorter.py)
