@@ -1,0 +1,31 @@
+id: dpd_LMS_postdistorter
+label: LMS postdistorter
+category: '[Dpd]'
+templates:
+  imports: import dpd
+  make: dpd.LMS_postdistorter(${dpd_params}, ${iter_limit}, ${method})
+parameters:
+- id: dpd_params
+  label: Dpd_params
+  dtype: int_vector
+- id: iter_limit
+  label: Iter_limit
+  dtype: int
+- id: method
+  label: Method
+  dtype: string
+  default: "newton"
+  options: ["newton", "ema"]
+  option_labels: [Newton, EMA]
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+- label: PA_Input
+  domain: stream
+  dtype: complex
+outputs:
+- label: taps
+  domain: message
+  id: taps
+file_format: 1

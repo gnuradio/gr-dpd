@@ -12,5 +12,6 @@ install(FILES
     dpd_RLS_postdistorter.block.yml
     dpd_stream_to_gmp_vector.block.yml
     dpd_gain_phase_calibrate.block.yml
-    dpd_stream_to_message.block.yml DESTINATION share/gnuradio/grc/blocks
+    dpd_stream_to_message.block.yml
+    dpd_LMS_postdistorter.block.yml DESTINATION share/gnuradio/grc/blocks
 )
