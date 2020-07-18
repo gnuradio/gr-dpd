@@ -444,36 +444,39 @@ int main()
   	double x,z;
   	std::cout << "Enter PA_input(pre-distorted) - Real and Imag. parts: \n";
   	std::cin >> x >> z;
-	  std::complex <double> PA_input = (x, z);
-	  std::cout << "Enter PA_output (Gain phase-calibrated) - Real and Imag. parts: \n";
-	  std::cin >> x >> z;
-	  std::complex <double> Gain_cal_PA_output = (x, z);
+	std::complex <double> PA_input = (x, z);
+	std::cout << "Enter PA_output (Gain phase-calibrated) - Real and Imag. parts: \n";
+	std::cin >> x >> z;
+	std::complex <double> Gain_cal_PA_output = (x, z);
 	
-	  std::cout << "K_a, L_a, K_b, M_b and L_b Parameters of PA model for postdistorter:\n";
-	  std::cin >> dpd_params[0] >> dpd_params[1] >> dpd_params[2] >> dpd_params[3] >> dpd_params[4];
-	  K_a = dpd_params[0];
-	  L_a = dpd_params[1];
-	  K_b = dpd_params[2];
+	std::cout << "K_a, L_a, K_b, M_b and L_b Parameters of PA model for postdistorter:\n";
+	std::cin >> dpd_params[0] >> dpd_params[1] >> dpd_params[2] >> dpd_params[3] >> dpd_params[4];
+	K_a = dpd_params[0];
+	L_a = dpd_params[1];
+	K_b = dpd_params[2];
   	M_b = dpd_params[3];
   	L_b = dpd_params[4];
   	M = dpd_params[0]*dpd_params[1] + dpd_params[2]*dpd_params[3]*dpd_params[4];
   	M_bar = dpd_params[0] + dpd_params[2]*dpd_params[3];
 	
-  	std::cout << "Enter number of Iterations:\n";
-  	std::cin >> iter_limit;
+  	// std::cout << "Enter number of Iterations:\n";
+  	// std::cin >> iter_limit;
   	 Init();
 	
   	// sr1[0] = pa_input;
-   //  gauss_smooth(sr1, pa_input_smooth);
-   //  sr2[0] = Gain_cal_PA_output;
-   //  gauss_smooth(sr2, pa_output_smooth);
+    // gauss_smooth(sr1, pa_input_smooth);
+    // sr2[0] = Gain_cal_PA_output;
+    // gauss_smooth(sr2, pa_output_smooth);
+    // sreg[49] = pa_output_smooth; 
     
     // extracting the PA output and arranging into a shift-structured GMP vector
-    sreg[49] = pa_output_smooth; 
+    pa_input = PA_input;
     sreg[49] = Gain_cal_PA_output;                   
     gen_GMPvector(ptr_sreg, 49, K_a, L_a+1, K_b, M_b, L_b+1, yy_cx_fcolvec);
     yy_cx_frowvec = yy_cx_fcolvec.st();
+
     // yy = conv_to<cx_fmat>::from(yy_cx_frowvec);
+    
     for (int ii = 1; ii < sreg_len; ii++)
         sreg[ii-1] = sreg[ii];          
      
