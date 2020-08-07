@@ -58,9 +58,9 @@ Below is the flowgraph screenshot:
 
 Here are some output screenshots on a *Frequency Sink* depicting the DPD effects on running the RLS Algorithm:
 
-![RLS_DPD_output-1.jpg](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_DPD_output-1.jpg)<br>
+![RLS_DPD_output-1.jpg](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_DPD_output-1.png)<br>
 
-![RLS_DPD_output-2.jpg](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_DPD_output-2.jpg)<br>
+![RLS_DPD_output-2.jpg](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_DPD_output-2.png)<br>
 
 
 
