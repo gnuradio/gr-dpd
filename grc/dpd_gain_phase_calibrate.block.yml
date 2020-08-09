@@ -11,6 +11,9 @@ inputs:
 - label: Input Sample
   domain: stream
   dtype: complex
+- label: PA DPD
+  domain: stream
+  dtype: complex
 outputs:
 - label: out
   domain: stream

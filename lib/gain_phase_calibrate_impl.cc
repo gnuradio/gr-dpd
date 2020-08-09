@@ -25,7 +25,7 @@ gain_phase_calibrate::sptr gain_phase_calibrate::make()
  */
 gain_phase_calibrate_impl::gain_phase_calibrate_impl()
     : gr::block("gain_phase_calibrate",
-                gr::io_signature::make(2, 2, sizeof(gr_complex)),
+                gr::io_signature::make(3, 3, sizeof(gr_complex)),
                 gr::io_signature::make(1, 1, sizeof(gr_complex)))
 {
     previous_cfactor = gr_complex(0.0, 0.0);
@@ -66,6 +66,7 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
 {
     const gr_complex* in1 = (const gr_complex*)input_items[0];
     const gr_complex* in2 = (const gr_complex*)input_items[1];
+    const gr_complex* in3 = (const gr_complex*)input_items[2];
     gr_complex* out = (gr_complex*)output_items[0];
 
 
@@ -92,7 +93,7 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
                 !almost_equals_zero(std::imag(in1[item]), 5))
                 previous_cfactor = cfactor;
 
-            out[item] = cfactor * in1[item];
+            out[item] = cfactor * in3[item];
             item++;
         //}
     }
