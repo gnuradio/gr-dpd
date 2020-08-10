@@ -32,7 +32,7 @@ public:
      * class. dpd::predistorter_training::make is the public interface for
      * creating new instances.
      */
-    static sptr make(const std::vector<int>& dpd_params);
+    static sptr make(const std::vector<int>& dpd_params, std::string mode, const std::vector<gr_complex>& taps);
 };
 
 } // namespace dpd

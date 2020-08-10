@@ -1,13 +1,21 @@
 id: dpd_predistorter_training
 label: Predistorter training block
 category: '[Dpd]'
-templates:
-  imports: import dpd
-  make: dpd.predistorter_training(${dpd_params})
 parameters:
 - id: dpd_params
   label: Dpd_params
   dtype: int_vector
+- id: mode
+  label: Predistorter Mode
+  dtype: string
+  default: "training"
+  options: ["training", "static"]
+  option_labels: [Training, Static]
+- id: tap
+  label: Predistorter Taps
+  dtype: complex_vector
+  default: (1) 
+  hide: ${ ('all' if mode == "training" else 'part') }
 inputs:
 - label: Input vector
   domain: stream
@@ -15,8 +23,12 @@ inputs:
 - label: taps
   domain: message
   id: taps
+  optional: ${ (1 if mode == "static" else 0) }
 outputs:
 - label: Out/ PA_Input
   domain: stream
   dtype: complex
+templates:
+  imports: import dpd
+  make: dpd.predistorter_training(${dpd_params}, ${mode}, ${tap})
 file_format: 1

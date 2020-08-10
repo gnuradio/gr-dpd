@@ -24,11 +24,12 @@ private:
     const int M_b;
     const int L_b;
     const int d_M;
+    std::string d_mode;
     bool d_update_predistorter_training, update_predistorter_training;
     arma::cx_colvec d_predistorter_training_colvec, predistorter_training_colvec;
 
 public:
-    predistorter_training_impl(const std::vector<int>& dpd_params);
+    predistorter_training_impl(const std::vector<int>& dpd_params, std::string mode, const std::vector<gr_complex>& taps);
     ~predistorter_training_impl();
 
     void get_taps(pmt::pmt_t P);
