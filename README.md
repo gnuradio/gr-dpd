@@ -1,4 +1,4 @@
-# gr-dpd: Digital Pre-Distotortion
+# gr-dpd: Digital Pre-Distortion
 --------------------------------------
 
 ## Overview:
@@ -42,7 +42,7 @@ gr-dpd requires:
 
 ## Installation:
 
-First you need to install the dependencies (above).
+First, you need to install the dependencies (above).
 
 Then, you need to download this repository
 ```bash
@@ -65,14 +65,14 @@ If your GNU Radio is installed in other directory (rather than /usr/local), then
 ## Working with the module:
 
 All the progress related details of the development of this module and proper documentation and resources related
-to this module can be found in [here](https://grdpd.wordpress.com/).
+to this module can be found [here](https://grdpd.wordpress.com/).
 
 ## Examples:
 
 Various example flowgraphs have been added so far to demonstrate the functioning of gr-dpd blocks.
 
 
-Below is the flowgraph demonstrating a RLS based predistortion run on a GMP model Power Amplifier:
+Below is the flowgraph demonstrating an RLS based pre-distortion run on a GMP model Power Amplifier:
 
 ![Test.grc - flowgraph](https://github.com/gnuradio/gr-dpd/blob/master/raw/RLS_test_run_two_tone_setup.jpg)<br>
 
@@ -84,7 +84,7 @@ If you want to contribute to the module, feel free to add the pull request.
 Please read the contribution guidelines of GNU Radio [here](https://wiki.gnuradio.org/index.php/Development).
 
 ## Contact
-For queries or feedbacks, drop a mail to [discuss-gnuradio](mailto:discuss-gnuradio@gnu.org).
+For queries or feedback, drop a mail to [discuss-gnuradio](mailto:discuss-gnuradio@gnu.org).
 
 ## License
 The project is licensed under GPLv3. See LICENSE for terms.
