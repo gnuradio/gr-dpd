@@ -6,7 +6,8 @@
 
 The gr-dpd module is a GNU Radio implementation of Digital Pre-Distortion, a popular technique used to compensate for 
 distortion caused due to non-linear Power Amplifiers used in wireless communication today.
-Also, this has been developed as a [GSoC 2020 project](https://summerofcode.withgoogle.com/projects/#6468946162614272)
+
+This has been developed as a [GSoC 2020 project](https://summerofcode.withgoogle.com/projects/#6468946162614272)
 under [GNU Radio](https://summerofcode.withgoogle.com/organizations/6453828414603264/).
 
 Major DPD Algorithms considered for this module are:
@@ -15,7 +16,7 @@ Major DPD Algorithms considered for this module are:
 * LMS (Least Mean Squares) Algorithm
 * Look-Up Table based Algorithm
 
-So, far RLS based algorithm has been implemented. 
+So, far RLS and LMS based algorithm has been implemented. 
 
 The blocks added to the module, so far, are:
 
@@ -64,8 +65,11 @@ If your GNU Radio is installed in other directory (rather than /usr/local), then
 
 ## Working with the module:
 
-All the progress related details of the development of this module and proper documentation and resources related
+All the progress related details of the development of this module and its proper documentation and resources related
 to this module can be found [here](https://grdpd.wordpress.com/).
+
+* Description of Example Flowgraphs can be seen [here](https://github.com/gnuradio/gr-dpd/tree/master/examples#gr-dpd-example-flowgraphs).
+* Documentation of the gr-dpd, containing each block's description is given [here](https://github.com/gnuradio/gr-dpd/tree/master/docs#gr-dpd-digital-pre-distortion).
 
 ## Examples:
 
