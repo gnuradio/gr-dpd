@@ -23,8 +23,8 @@ using namespace arma;
 //       { 0.2939, 0.0005 },
 //       { -0.1270, 0.0034 },
 //       { 0.0741, 0.0018 } }, // 1st order coeffs
-//     { { 0.8295, -0.0001 }, { 0.1939, 0.0005 }, { -0.0270, 0.0014 }, { 0.0341, 0.0008 } },
-//     { { 0.1419, -0.0008 },
+//     { { 0.8295, -0.0001 }, { 0.1939, 0.0005 }, { -0.0270, 0.0014 }, { 0.0341, 0.0008 }
+//     }, { { 0.1419, -0.0008 },
 //       { -0.0735, 0.0833 },
 //       { -0.0535, 0.0004 },
 //       { 0.0908, -0.0473 } }, // 3rd order coeffs
@@ -40,7 +40,8 @@ using namespace arma;
 //       { -0.2610, 0.0174 },
 //       { -0.1511, -0.0703 },
 //       { -0.0323, -0.0169 } },
-//     { { 0.1774, 0.0265 }, { 0.0848, 0.0613 }, { -0.0362, -0.0307 }, { 0.0415, 0.0429 } }
+//     { { 0.1774, 0.0265 }, { 0.0848, 0.0613 }, { -0.0362, -0.0307 }, { 0.0415, 0.0429 }
+//     }
 // }; // 7th order coeffs
 
 // cx_fmat coef = { { { 0.2000, 0.0500 }, { 0.1000, -0.0050 }, { 0.0100, 0.0010 } },
@@ -58,11 +59,17 @@ GMP_model_PA::sptr GMP_model_PA::make(int model_param1,
                                       int model_param4,
                                       int model_param5,
                                       std::string mode,
-                                      const std::vector <gr_complex> &coeff1,
-                                      const std::vector <gr_complex> &coeff2)
+                                      const std::vector<gr_complex>& coeff1,
+                                      const std::vector<gr_complex>& coeff2)
 {
-    return gnuradio::get_initial_sptr(new GMP_model_PA_impl(
-        model_param1, model_param2, model_param3, model_param4, model_param5, mode, coeff1, coeff2));
+    return gnuradio::get_initial_sptr(new GMP_model_PA_impl(model_param1,
+                                                            model_param2,
+                                                            model_param3,
+                                                            model_param4,
+                                                            model_param5,
+                                                            mode,
+                                                            coeff1,
+                                                            coeff2));
 }
 
 
@@ -75,8 +82,8 @@ GMP_model_PA_impl::GMP_model_PA_impl(int model_param1,
                                      int model_param4,
                                      int model_param5,
                                      std::string mode,
-                                     const std::vector <gr_complex> &coeff1,
-                                     const std::vector <gr_complex> &coeff2)
+                                     const std::vector<gr_complex>& coeff1,
+                                     const std::vector<gr_complex>& coeff2)
     : gr::sync_block("GMP_model_PA",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
@@ -102,34 +109,30 @@ GMP_model_PA_impl::GMP_model_PA_impl(int model_param1,
  */
 GMP_model_PA_impl::~GMP_model_PA_impl() {}
 
-void GMP_model_PA_impl::initialise_Coefficients(const std::vector <gr_complex> &coeff1, const std::vector <gr_complex> &coeff2)
+void GMP_model_PA_impl::initialise_Coefficients(const std::vector<gr_complex>& coeff1,
+                                                const std::vector<gr_complex>& coeff2)
 {
-	int inx = 0;
+    int inx = 0;
 
-	// Initialise coefficients of signal-and-aligned envelope
-	for(int i = 0; i < K_a; i++)
-	{
-		for(int j = 0; j < L_a; j++)
-		{
-			coeff_1(i, j) = coeff1[inx];
-			inx++;
-			//std::cout << coeff_1(i, j) << "\n";
-		}
-	}
-	inx = 0;
+    // Initialise coefficients of signal-and-aligned envelope
+    for (int i = 0; i < K_a; i++) {
+        for (int j = 0; j < L_a; j++) {
+            coeff_1(i, j) = coeff1[inx];
+            inx++;
+            // std::cout << coeff_1(i, j) << "\n";
+        }
+    }
+    inx = 0;
 
-	// Initialise coefficients of signal-and-lagging envelope
-	for(int i = 0; i < K_b; i++)
-	{
-		for(int j = 0; j < M_b; j++)
-		{
-			for(int k = 0; k < L_b; k++)
-			{
-				coeff_2(i, j, k) = coeff2[inx];
-				//std::cout << coeff_1(i, j) << "\n";
-			}
-		}
-	}
+    // Initialise coefficients of signal-and-lagging envelope
+    for (int i = 0; i < K_b; i++) {
+        for (int j = 0; j < M_b; j++) {
+            for (int k = 0; k < L_b; k++) {
+                coeff_2(i, j, k) = coeff2[inx];
+                // std::cout << coeff_1(i, j) << "\n";
+            }
+        }
+    }
 }
 void GMP_model_PA_impl::gen_GMP_vector(const gr_complex* const in,
                                        int item,
@@ -211,15 +214,15 @@ int GMP_model_PA_impl::work(int noutput_items,
             int L_st = (K * L_a);
             int L_en = ((K + 1) * L_a);
             // Include terms in output according to Mode of Operation value
-            if((K % 2) == 0 && Mode_vl == "Even")
-              continue;
-            else if((K % 2) && Mode_vl == "Odd")
-              continue;
+            if ((K % 2) == 0 && Mode_vl == "Even")
+                continue;
+            else if ((K % 2) && Mode_vl == "Odd")
+                continue;
             for (int L = L_st; L < L_en; L++) {
                 gr_complex a = GMP_vector(L);
                 gr_complex b = coeff_1(K, (L - L_st));
                 out[item - history() + 1] += (a * b);
-                //std::cout << a << " " <<  << "\n"; 
+                // std::cout << a << " " <<  << "\n";
             }
         }
         // gr_complex a = GMP_vector((K_a * L_a));
@@ -228,10 +231,10 @@ int GMP_model_PA_impl::work(int noutput_items,
         for (int m = 0; m < M_b; m++) {
             for (int k = 0; k < K_b; k++) {
                 // Include terms in output according to Mode of Operation value
-                if((k % 2) == 0 && Mode_vl == "Odd")
-                  continue;
-                else if((k % 2) && Mode_vl == "Even")
-                  continue; 
+                if ((k % 2) == 0 && Mode_vl == "Odd")
+                    continue;
+                else if ((k % 2) && Mode_vl == "Even")
+                    continue;
                 int L_st = (m * L_b * K_b) + (K_a * L_a) + k * L_b;
                 int L_en = (m * L_b * K_b) + (K_a * L_a) + (k + 1) * L_b;
                 for (int l = L_st; l < L_en; l++) {

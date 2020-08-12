@@ -23,16 +23,23 @@ using namespace arma;
 namespace gr {
 namespace dpd {
 
-predistorter_training::sptr predistorter_training::make(const std::vector<int>& dpd_params, std::string mode, const std::vector<gr_complex>& taps)
+predistorter_training::sptr
+predistorter_training::make(const std::vector<int>& dpd_params,
+                            std::string mode,
+                            const std::vector<gr_complex>& taps)
 {
-    return gnuradio::get_initial_sptr(new predistorter_training_impl(dpd_params, mode, taps));
+    return gnuradio::get_initial_sptr(
+        new predistorter_training_impl(dpd_params, mode, taps));
 }
 
 
 /*
  * The private constructor
  */
-predistorter_training_impl::predistorter_training_impl(const std::vector<int>& dpd_params, std::string mode, const std::vector<gr_complex>& taps)
+predistorter_training_impl::predistorter_training_impl(
+    const std::vector<int>& dpd_params,
+    std::string mode,
+    const std::vector<gr_complex>& taps)
     : gr::sync_block("predistorter_training",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
@@ -51,14 +58,13 @@ predistorter_training_impl::predistorter_training_impl(const std::vector<int>& d
     set_history(std::max(L_a, M_b + L_b));
     // setup output message port for
     // sending predistorted PA input to the postdistorter
-    //message_port_register_out(pmt::mp("PA_input"));
+    // message_port_register_out(pmt::mp("PA_input"));
 
-    
-    if(mode == "static")
-    for(int i = 0; i < taps.size(); i++)
-    {
-        d_predistorter_training_colvec(i) = taps[i];
-    }
+
+    if (mode == "static")
+        for (int i = 0; i < taps.size(); i++) {
+            d_predistorter_training_colvec(i) = taps[i];
+        }
     // setup input message port
     message_port_register_in(pmt::mp("taps"));
     set_msg_handler(pmt::mp("taps"),
@@ -79,13 +85,13 @@ void predistorter_training_impl::get_taps(pmt::pmt_t P)
         d_predistorter_training_colvec(i) = pmt::c64vector_ref(P, i);
 }
 void predistorter_training_impl::gen_GMPvector(const gr_complex* const in,
-                                       int item,
-                                       int K_a,
-                                       int L_a,
-                                       int K_b,
-                                       int M_b,
-                                       int L_b,
-                                       cx_fcolvec& GMP_vector)
+                                               int item,
+                                               int K_a,
+                                               int L_a,
+                                               int K_b,
+                                               int M_b,
+                                               int L_b,
+                                               cx_fcolvec& GMP_vector)
 {
     /* Signal-and-Aligned Envelope */
     // stacking L_a elements in reverse order
@@ -153,7 +159,7 @@ int predistorter_training_impl::work(int noutput_items,
         // for predistortion
         // cx_fmat yy_cx_rowvec(
         //     ((gr_complex*)input_items[0]) + item * d_M, 1, d_M, COPY_MEM, FIX_SIZE);
-        
+
         predistorter_training_colvec = d_predistorter_training_colvec;
         update_predistorter_training = d_update_predistorter_training;
         cx_fcolvec GMP_vector(d_M);

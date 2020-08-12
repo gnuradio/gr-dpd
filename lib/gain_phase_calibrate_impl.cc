@@ -78,23 +78,21 @@ int gain_phase_calibrate_impl::general_work(int noutput_items,
         // sample = d_sample;
         sample = in2[item];
         current_cfactor = sample / in1[item];
-        //if (reference_acquired) {
-            if(previous_cfactor != gr_complex(0.0, 0.0))
-            {
-            	cfactor_avg_sum = cfactor_avg_sum + current_cfactor;
-                cfactor = cfactor_avg_sum/gr_complex(item + 1.0);
-            }
-            else
-                cfactor = current_cfactor;
+        // if (reference_acquired) {
+        if (previous_cfactor != gr_complex(0.0, 0.0)) {
+            cfactor_avg_sum = cfactor_avg_sum + current_cfactor;
+            cfactor = cfactor_avg_sum / gr_complex(item + 1.0);
+        } else
+            cfactor = current_cfactor;
 
-            // cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
+        // cfactor = gr_complex(0.5, 0.0) * (previous_cfactor + current_cfactor);
 
-            if (!almost_equals_zero(std::real(in1[item]), 5) &&
-                !almost_equals_zero(std::imag(in1[item]), 5))
-                previous_cfactor = cfactor;
+        if (!almost_equals_zero(std::real(in1[item]), 5) &&
+            !almost_equals_zero(std::imag(in1[item]), 5))
+            previous_cfactor = cfactor;
 
-            out[item] = cfactor * in3[item];
-            item++;
+        out[item] = cfactor * in3[item];
+        item++;
         //}
     }
 

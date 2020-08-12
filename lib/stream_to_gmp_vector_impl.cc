@@ -58,13 +58,13 @@ stream_to_gmp_vector_impl::stream_to_gmp_vector_impl(const std::vector<int>& dpd
  */
 stream_to_gmp_vector_impl::~stream_to_gmp_vector_impl() {}
 void stream_to_gmp_vector_impl::gen_GMPvector(const gr_complex* const in,
-                                       int item,
-                                       int K_a,
-                                       int L_a,
-                                       int K_b,
-                                       int M_b,
-                                       int L_b,
-                                       cx_fcolvec& GMP_vector)
+                                              int item,
+                                              int K_a,
+                                              int L_a,
+                                              int K_b,
+                                              int M_b,
+                                              int L_b,
+                                              cx_fcolvec& GMP_vector)
 {
     /* Signal-and-Aligned Envelope */
     // stacking L_a elements in reverse order

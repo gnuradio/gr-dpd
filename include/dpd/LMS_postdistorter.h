@@ -21,35 +21,35 @@
 #ifndef INCLUDED_DPD_LMS_POSTDISTORTER_H
 #define INCLUDED_DPD_LMS_POSTDISTORTER_H
 
-#include <dpd/api.h>
 #include <gnuradio/sync_block.h>
+#include <dpd/api.h>
 
 namespace gr {
-  namespace dpd {
+namespace dpd {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup dpd
+ *
+ */
+class DPD_API LMS_postdistorter : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<LMS_postdistorter> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup dpd
+     * \brief Return a shared_ptr to a new instance of dpd::LMS_postdistorter.
      *
+     * To avoid accidental use of raw pointers, dpd::LMS_postdistorter's
+     * constructor is in a private implementation
+     * class. dpd::LMS_postdistorter::make is the public interface for
+     * creating new instances.
      */
-    class DPD_API LMS_postdistorter : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<LMS_postdistorter> sptr;
+    static sptr
+    make(const std::vector<int>& dpd_params, int iter_limit, std::string method);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of dpd::LMS_postdistorter.
-       *
-       * To avoid accidental use of raw pointers, dpd::LMS_postdistorter's
-       * constructor is in a private implementation
-       * class. dpd::LMS_postdistorter::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(const std::vector<int>& dpd_params, int iter_limit, std::string method);
-    };
-
-  } // namespace dpd
+} // namespace dpd
 } // namespace gr
 
 #endif /* INCLUDED_DPD_LMS_POSTDISTORTER_H */
-

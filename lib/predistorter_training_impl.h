@@ -29,18 +29,20 @@ private:
     arma::cx_colvec d_predistorter_training_colvec, predistorter_training_colvec;
 
 public:
-    predistorter_training_impl(const std::vector<int>& dpd_params, std::string mode, const std::vector<gr_complex>& taps);
+    predistorter_training_impl(const std::vector<int>& dpd_params,
+                               std::string mode,
+                               const std::vector<gr_complex>& taps);
     ~predistorter_training_impl();
 
     void get_taps(pmt::pmt_t P);
     void gen_GMPvector(const gr_complex* const in,
-                        int item,
-                        int K_a,
-                        int L_a,
-                        int K_b,
-                        int M_b,
-                        int L_b,
-                        arma::cx_fcolvec& GMP_vector);
+                       int item,
+                       int K_a,
+                       int L_a,
+                       int K_b,
+                       int M_b,
+                       int L_b,
+                       arma::cx_fcolvec& GMP_vector);
     // Where all the action really happens
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,

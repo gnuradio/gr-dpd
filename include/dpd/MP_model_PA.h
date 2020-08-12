@@ -47,7 +47,10 @@ public:
      * class. dpd::MP_model_PA::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int Order, int Mem_Depth, std::string Mode, const std::vector <gr_complex> &Coeff);
+    static sptr make(int Order,
+                     int Mem_Depth,
+                     std::string Mode,
+                     const std::vector<gr_complex>& Coeff);
 };
 
 } // namespace dpd

@@ -440,65 +440,63 @@ int RLS_postdistorter_impl::work(int noutput_items,
         const uint64_t nread = this->nitems_read(0);
 
         // if (ack_predistorter_updated) {
-            // std::cout << "Iteration Number: " << iteration << std::endl;
+        // std::cout << "Iteration Number: " << iteration << std::endl;
 
-            // extracting the PA output and arranging into a shift-structured GMP vector
-            // sreg[49] = pa_output_smooth;
-            if (iteration == d_iter_limit) {
-                taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
-                pmt::pmt_t P_c32vector_taps = pmt::init_c64vector(M, taps);
-                message_port_pub(pmt::mp("taps"), P_c32vector_taps);
-                continue;
-            }
-            pa_input = in2[item];
-            sreg[49] = in1[item];
-            gen_GMPvector(ptr_sreg, 49, K_a, L_a + 1, K_b, M_b, L_b + 1, yy_cx_fcolvec);
-            yy_cx_frowvec = yy_cx_fcolvec.st();
-            for (int ii = 1; ii < sreg_len; ii++)
-                sreg[ii - 1] = sreg[ii];
-
-            // A-matrix
-            A_mat.submat(0, 0, 0, 0) = inv_sqrt_gamma_iMinus1;
-            A_mat.submat(0, 1, 0, M_bar * 2) = yy_cx_frowvec * L_bar_iMinus1;
-            A_mat.submat(1, 0, M + M_bar, 0) = g_vec_iMinus1;
-            A_mat.submat(1, 1, M + M_bar, M_bar * 2) = L_bar_iMinus1;
-
-            // obtain B-matrix by performing Givens and Hyperbolic Givens rotations
-            apply_rotations(A_mat, B_mat);
-
-            // time-update for 1/sqrt(gamma)
-            inv_sqrt_gamma_iMinus1 =
-                real(B_mat(0, 0)); // imag(B_mat(0, 0)) will be ~= 0.0
-            // std::cout << "inv_sqrt_gamma_iMinus1: " << inv_sqrt_gamma_iMinus1 <<
-            // std::endl;
-
-            // time-update for g-vector
-            g = B_mat(span(1, M + M_bar), 0);
-            extract_g_vecs(
-                g, g_vec_iMinus1, g_vec_i, K_a, L_a, K_b, M_b, L_b, M, M + M_bar);
-
-            // adjust post-distorted PA output dimensions
-            extract_postdistorted_y(yy_cx_frowvec, y, K_a, L_a, K_b, M_b, L_b, M);
-
-            // adaptation error
-            error = pa_input - as_scalar(y * w_iMinus1);
-
-            // update weight-vector
-            w_iMinus1 = w_iMinus1 + (error / inv_sqrt_gamma_iMinus1) * g_vec_i;
-
-            // prepare L_bar for next iteration
-            L_bar_iMinus1 = gr_complexd(one_over_sqrt_lambda, 0.0) *
-                            B_mat(span(1, M + M_bar), span(1, 2 * M_bar));
-
-            // send weight-vector to predistorter block in a message
+        // extracting the PA output and arranging into a shift-structured GMP vector
+        // sreg[49] = pa_output_smooth;
+        if (iteration == d_iter_limit) {
             taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
             pmt::pmt_t P_c32vector_taps = pmt::init_c64vector(M, taps);
             message_port_pub(pmt::mp("taps"), P_c32vector_taps);
+            continue;
+        }
+        pa_input = in2[item];
+        sreg[49] = in1[item];
+        gen_GMPvector(ptr_sreg, 49, K_a, L_a + 1, K_b, M_b, L_b + 1, yy_cx_fcolvec);
+        yy_cx_frowvec = yy_cx_fcolvec.st();
+        for (int ii = 1; ii < sreg_len; ii++)
+            sreg[ii - 1] = sreg[ii];
 
-            iteration++;
+        // A-matrix
+        A_mat.submat(0, 0, 0, 0) = inv_sqrt_gamma_iMinus1;
+        A_mat.submat(0, 1, 0, M_bar * 2) = yy_cx_frowvec * L_bar_iMinus1;
+        A_mat.submat(1, 0, M + M_bar, 0) = g_vec_iMinus1;
+        A_mat.submat(1, 1, M + M_bar, M_bar * 2) = L_bar_iMinus1;
+
+        // obtain B-matrix by performing Givens and Hyperbolic Givens rotations
+        apply_rotations(A_mat, B_mat);
+
+        // time-update for 1/sqrt(gamma)
+        inv_sqrt_gamma_iMinus1 = real(B_mat(0, 0)); // imag(B_mat(0, 0)) will be ~= 0.0
+        // std::cout << "inv_sqrt_gamma_iMinus1: " << inv_sqrt_gamma_iMinus1 <<
+        // std::endl;
+
+        // time-update for g-vector
+        g = B_mat(span(1, M + M_bar), 0);
+        extract_g_vecs(g, g_vec_iMinus1, g_vec_i, K_a, L_a, K_b, M_b, L_b, M, M + M_bar);
+
+        // adjust post-distorted PA output dimensions
+        extract_postdistorted_y(yy_cx_frowvec, y, K_a, L_a, K_b, M_b, L_b, M);
+
+        // adaptation error
+        error = pa_input - as_scalar(y * w_iMinus1);
+
+        // update weight-vector
+        w_iMinus1 = w_iMinus1 + (error / inv_sqrt_gamma_iMinus1) * g_vec_i;
+
+        // prepare L_bar for next iteration
+        L_bar_iMinus1 = gr_complexd(one_over_sqrt_lambda, 0.0) *
+                        B_mat(span(1, M + M_bar), span(1, 2 * M_bar));
+
+        // send weight-vector to predistorter block in a message
+        taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
+        pmt::pmt_t P_c32vector_taps = pmt::init_c64vector(M, taps);
+        message_port_pub(pmt::mp("taps"), P_c32vector_taps);
+
+        iteration++;
 
 
-            ack_predistorter_updated = false;
+        ack_predistorter_updated = false;
         //}
     }
     // Tell runtime system how many output items we produced.
