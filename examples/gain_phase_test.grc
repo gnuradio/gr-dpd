@@ -105,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 309]
+    coordinate: [62, 301]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -123,7 +123,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [595, 379]
+    coordinate: [639, 374]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -142,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 349]
+    coordinate: [316, 341]
     rotation: 0
     state: true
 - name: dpd_gain_phase_calibrate_0
@@ -157,7 +157,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [820, 487]
+    coordinate: [945, 481]
     rotation: 0
     state: enabled
 - name: import_0
@@ -170,7 +170,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [7, 109]
+    coordinate: [27, 121]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -267,13 +267,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1057, 354]
+    coordinate: [1196, 344]
     rotation: 0
     state: true
 
 connections:
 - [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
 - [blocks_multiply_const_vxx_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [blocks_multiply_const_vxx_0, '0', dpd_gain_phase_calibrate_0, '2']
 - [blocks_multiply_const_vxx_0, '0', qtgui_time_sink_x_0, '1']
 - [blocks_throttle_0, '0', blocks_multiply_const_vxx_0, '0']
 - [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']

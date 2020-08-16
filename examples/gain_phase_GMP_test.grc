@@ -132,6 +132,8 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
+    coeff1: (1)
+    coeff2: (1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -160,7 +162,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [877, 627]
+    coordinate: [931, 624]
     rotation: 0
     state: enabled
 - name: import_0
@@ -173,7 +175,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [7, 109]
+    coordinate: [27, 128]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -270,7 +272,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1127, 352]
+    coordinate: [1152, 352]
     rotation: 0
     state: true
 
@@ -280,6 +282,7 @@ connections:
 - [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [blocks_throttle_0, '0', qtgui_time_sink_x_0, '0']
 - [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '2']
 - [dpd_GMP_model_PA_0, '0', qtgui_time_sink_x_0, '1']
 - [dpd_gain_phase_calibrate_0, '0', qtgui_time_sink_x_0, '2']
 

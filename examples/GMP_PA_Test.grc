@@ -192,7 +192,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1)
+    coeff1: (10)
     coeff2: (1)
     comment: ''
     maxoutbuf: '0'

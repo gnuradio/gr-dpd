@@ -27,7 +27,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [-44, 10]
+    coordinate: [16, 15]
     rotation: 0
     state: enabled
 
@@ -50,7 +50,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 32]
+    coordinate: [198, 21]
     rotation: 0
     state: true
 - name: param_1
@@ -71,7 +71,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 51]
+    coordinate: [351, 23]
     rotation: 0
     state: true
 - name: samp_rate
@@ -83,7 +83,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 128]
+    coordinate: [20, 142]
     rotation: 0
     state: true
 - name: analog_fastnoise_source_x_0
@@ -147,7 +147,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 524]
+    coordinate: [52, 522]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -207,7 +207,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1324, 122]
+    coordinate: [1110, 367]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_1
@@ -230,7 +230,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [889, 729]
+    coordinate: [725, 661]
     rotation: 0
     state: true
 - name: dpd_predistorter_training_0
@@ -248,7 +248,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [921, 152]
+    coordinate: [772, 394]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1
@@ -328,7 +328,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1370, 768]
+    coordinate: [1193, 702]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2
@@ -408,7 +408,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1870, 164]
+    coordinate: [1445, 412]
     rotation: 0
     state: true
 

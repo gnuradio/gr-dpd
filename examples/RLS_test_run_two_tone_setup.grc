@@ -275,7 +275,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: training
-    tap: (1, 0.1)
+    tap: (1)
   states:
     bus_sink: false
     bus_source: false

@@ -27,31 +27,85 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 8]
+    coordinate: [13, 32]
     rotation: 0
     state: enabled
 
 blocks:
+- name: param_0
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: '[0,0,1,1]'
+    label: Frequency
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1000'
+    stop: '500000'
+    value: '10000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [201, 16]
+    rotation: 0
+    state: true
+- name: param_1
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: '[0,1,1,1]'
+    label: Amplitude
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.01'
+    stop: '3'
+    value: '0.2'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [332, 17]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '1000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [9, 175]
+    rotation: 0
+    state: true
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
     affinity: ''
     alias: ''
-    amp: '1'
+    amp: param_1
     comment: ''
-    freq: '1000'
+    freq: param_0
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
     phase: '0'
-    samp_rate: '25000'
+    samp_rate: samp_rate
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [44, 349]
+    coordinate: [65, 464]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_0
@@ -74,7 +128,30 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [907, 31]
+    coordinate: [938, 153]
+    rotation: 0
+    state: true
+- name: dpd_GMP_model_PA_0_0
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    coeff1: (1)
+    coeff2: (1)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: Both
+    model_param1: '1'
+    model_param2: '1'
+    model_param3: '1'
+    model_param4: '1'
+    model_param5: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 692]
     rotation: 0
     state: true
 - name: dpd_RLS_postdistorter_0
@@ -91,7 +168,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [369, 214]
+    coordinate: [400, 336]
     rotation: 180
     state: true
 - name: dpd_gain_phase_calibrate_0
@@ -106,7 +183,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [909, 357]
+    coordinate: [940, 479]
     rotation: 180
     state: true
 - name: dpd_predistorter_training_0
@@ -118,11 +195,13 @@ blocks:
     dpd_params: (1, 1, 2, 2, 2)
     maxoutbuf: '0'
     minoutbuf: '0'
+    mode: training
+    tap: (1)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [370, 59]
+    coordinate: [401, 181]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -143,7 +222,7 @@ blocks:
     autoscale: 'False'
     average: '1.0'
     axislabels: 'True'
-    bw: '25000'
+    bw: samp_rate
     color1: '"blue"'
     color10: '"dark blue"'
     color2: '"red"'
@@ -160,7 +239,7 @@ blocks:
     fftsize: '1024'
     freqhalf: 'True'
     grid: 'False'
-    gui_hint: ''
+    gui_hint: '[1,1,4,1]'
     label: Relative Gain
     label1: ''
     label10: ''''''
@@ -175,7 +254,7 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '""'
+    name: '"PA_with_DPD"'
     nconnections: '1'
     showports: 'False'
     tr_chan: '0'
@@ -202,15 +281,98 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1201, 176]
+    coordinate: [1314, 196]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_1
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: '[1,0,4,1]'
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"PA_without_DPD"'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [939, 736]
     rotation: 0
     state: true
 
 connections:
+- [analog_sig_source_x_0, '0', dpd_GMP_model_PA_0_0, '0']
 - [analog_sig_source_x_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [analog_sig_source_x_0, '0', dpd_predistorter_training_0, '0']
 - [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '2']
 - [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_0, '0']
+- [dpd_GMP_model_PA_0_0, '0', qtgui_freq_sink_x_1, '0']
 - [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
 - [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']

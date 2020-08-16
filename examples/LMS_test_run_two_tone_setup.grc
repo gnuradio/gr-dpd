@@ -230,7 +230,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [773, 638]
+    coordinate: [1227, 635]
     rotation: 0
     state: true
 - name: dpd_LMS_postdistorter_0
@@ -242,7 +242,7 @@ blocks:
     dpd_params: (1,1,2,2,2)
     iter_limit: '10000'
     maxoutbuf: '0'
-    method: ema
+    method: newton
     minoutbuf: '0'
   states:
     bus_sink: false
@@ -275,6 +275,8 @@ blocks:
     dpd_params: (1,1,2,2,2)
     maxoutbuf: '0'
     minoutbuf: '0'
+    mode: training
+    tap: (1)
   states:
     bus_sink: false
     bus_source: false
@@ -359,7 +361,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 677]
+    coordinate: [1670, 684]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2
@@ -439,7 +441,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1633, 70]
+    coordinate: [1639, 63]
     rotation: 0
     state: true
 
@@ -451,8 +453,9 @@ connections:
 - [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
 - [blocks_throttle_0, '0', dpd_gain_phase_calibrate_0, '1']
 - [blocks_throttle_0, '0', dpd_predistorter_training_0, '0']
-- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '2']
 - [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
+- [dpd_GMP_model_PA_1, '0', dpd_gain_phase_calibrate_0, '0']
 - [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
 - [dpd_LMS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
 - [dpd_gain_phase_calibrate_0, '0', dpd_LMS_postdistorter_0, '0']
