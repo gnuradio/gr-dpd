@@ -20,14 +20,14 @@ So, far RLS and LMS based algorithm has been implemented.
 
 The blocks added to the module, so far, are:
 
-* *GMP_model_PA*
-* *MP_model_PA*
-* *stream_to_message*
-* *stream_to_gmp_vector*
-* *predistorter_training*
-* *RLS_postdistorter*
-* *gain_phase_calibrate*
-* *LMS_postdistorter*
+* [GMP_model_PA](https://github.com/gnuradio/gr-dpd/tree/master/docs#gmp-model-pa)
+* [MP_model_PA](https://github.com/gnuradio/gr-dpd/tree/master/docs#mp-model-pa)
+* [predistorter_training](https://github.com/gnuradio/gr-dpd/tree/master/docs#predistorter-training)
+* [RLS_postdistorter](https://github.com/gnuradio/gr-dpd/tree/master/docs#rls-postdistorter)
+* [gain_phase_calibrate](https://github.com/gnuradio/gr-dpd/tree/master/docs#gain-phase-calibrate)
+* [LMS_postdistorter](https://github.com/gnuradio/gr-dpd/tree/master/docs#lms-postdistorter)
+* [stream_to_message](https://github.com/gnuradio/gr-dpd/tree/master/docs#stream_to_message)
+* [stream_to_gmp_vector](https://github.com/gnuradio/gr-dpd/tree/master/docs#stream_to_gmp_vector)
 
 ## Dependencies:
 
@@ -65,11 +65,11 @@ If your GNU Radio is installed in other directory (rather than /usr/local), then
 
 ## Working with the module:
 
-All the progress related details of the development of this module and its proper documentation and resources related
+All the progress related details of the development of this module and its proper record and resources related
 to this module can be found [here](https://grdpd.wordpress.com/).
 
-* Description of Example Flowgraphs can be seen [here](https://github.com/gnuradio/gr-dpd/tree/master/examples#gr-dpd-example-flowgraphs).
-* Documentation of the gr-dpd, containing each block's description is given [here](https://github.com/gnuradio/gr-dpd/tree/master/docs#gr-dpd-digital-pre-distortion).
+* Description of [Example Flowgraphs](https://github.com/gnuradio/gr-dpd/tree/master/examples) can be seen [here](https://github.com/gnuradio/gr-dpd/tree/master/examples#gr-dpd-example-flowgraphs).
+* [Documentation](https://github.com/gnuradio/gr-dpd/tree/master/docs) of the gr-dpd, containing each block's description is given [here](https://github.com/gnuradio/gr-dpd/tree/master/docs#gr-dpd-digital-pre-distortion).
 
 ## Examples:
 
