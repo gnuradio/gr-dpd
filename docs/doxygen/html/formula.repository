@@ -1,0 +1,5 @@
+\form#0:\[ y[n] = \sum\limits_{k=0}^{K_a-1}(\sum\limits_{l=0}^{L_a-1} a_{kl} x(n-l) |x(n-l)|^{k}) + \\ \sum\limits_{k=1}^{K_b}(\sum\limits_{m=1}^{M_b}(\sum\limits_{l=0}^{L_b-1} b_{kml} x(n-l) |x(n-l-m)|^{k})) \]
+\form#1:$M = K_a L_a + K_b M_b L_b$
+\form#2:$K_a + K_b M_b$
+\form#3:\[ y[n] = \sum\limits_{k=1}^{K}(\sum\limits_{m=0}^{M} a_{km} x(n-m) |x(n-m)|^{k-1}) \]
+\form#4:$a_{km}$
