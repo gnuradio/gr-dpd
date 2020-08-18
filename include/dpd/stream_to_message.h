@@ -15,7 +15,8 @@ namespace gr {
 namespace dpd {
 
 /*!
- * \brief <+description of block+>
+ * \brief Converts a stream of single complex data item into messages (PMT's)
+ *  which are published by output message port 'message'.
  * \ingroup dpd
  *
  */
@@ -25,12 +26,8 @@ public:
     typedef boost::shared_ptr<stream_to_message> sptr;
 
     /*!
-     * \brief Return a shared_ptr to a new instance of dpd::stream_to_message.
+     * \brief Make stream_to_message block
      *
-     * To avoid accidental use of raw pointers, dpd::stream_to_message's
-     * constructor is in a private implementation
-     * class. dpd::stream_to_message::make is the public interface for
-     * creating new instances.
      */
     static sptr make();
 };
