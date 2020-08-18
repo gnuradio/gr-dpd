@@ -1,6 +1,6 @@
 id: dpd_MP_model_PA
 label: MP model PA
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.MP_model_PA(${Order}, ${Mem_Depth}, ${Mode}, ${Coeff})

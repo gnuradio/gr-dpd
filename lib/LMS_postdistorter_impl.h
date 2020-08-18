@@ -52,7 +52,9 @@ public:
                            std::string method);
     ~LMS_postdistorter_impl();
 
+    // Least Squares Estimation utility
     cx_mat ls_estimation(cx_mat A, gr_complexd y);
+    // Genrates shift-structured GMP vector
     void gen_GMPvector(const gr_complexd* const in,
                        int item,
                        int K_a,

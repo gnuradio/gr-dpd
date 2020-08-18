@@ -21,8 +21,10 @@ namespace dpd {
 class MP_model_PA_impl : public MP_model_PA
 {
 private:
-    int K_a; // No. of channels or order of PA model
-    int L_a; // No. of taps or memory-depth
+    // No. of channels or order of PA model
+    int K_a;
+    // No. of taps or memory-depth
+    int L_a;
     std::string Mode_val;
     cx_fmat coeff;
 
@@ -33,11 +35,13 @@ public:
                      const std::vector<gr_complex>& Coeff);
     ~MP_model_PA_impl();
 
-    // Where all the action really happens
+    // Where all the action or processing really happens
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,
              gr_vector_void_star& output_items);
+    // Copies the GRC block coefficients parameters into class variable coeff
     void initialise_Coefficients(const std::vector<gr_complex>& Coeff);
+    // Generates a shift-structured MP model based vector
     void gen_MP_vector(
         const gr_complex* in, int item, int K_a, int L_a, cx_fcolvec& MP_vector);
 };

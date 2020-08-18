@@ -1,6 +1,6 @@
 id: dpd_LMS_postdistorter
 label: LMS postdistorter
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.LMS_postdistorter(${dpd_params}, ${iter_limit}, ${method})

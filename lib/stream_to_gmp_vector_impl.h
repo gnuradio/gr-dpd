@@ -33,6 +33,7 @@ public:
     ~stream_to_gmp_vector_impl();
 
 
+    // Genrates shift-structured GMP vector based on the parameters
     void gen_GMPvector(const gr_complex* const in,
                        int item,
                        int K_a,

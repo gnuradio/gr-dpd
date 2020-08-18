@@ -1,6 +1,6 @@
 id: dpd_RLS_postdistorter
 label: RLS postdistorter
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.RLS_postdistorter(${dpd_params}, ${iter_limit})

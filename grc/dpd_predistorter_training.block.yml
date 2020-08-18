@@ -1,6 +1,6 @@
 id: dpd_predistorter_training
 label: Predistorter training block
-category: '[Dpd]'
+category: '[DPD]'
 parameters:
 - id: dpd_params
   label: Dpd_params

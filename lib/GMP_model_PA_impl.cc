@@ -18,6 +18,8 @@
 using std::vector;
 using namespace arma;
 
+// Legacy Coefficients Default Values:
+//
 // cx_fmat coeff1 = {
 //     { { 0.9295, -0.0001 },
 //       { 0.2939, 0.0005 },
@@ -96,9 +98,6 @@ GMP_model_PA_impl::GMP_model_PA_impl(int model_param1,
       Mode_vl(mode)
 {
     set_history(std::max(L_a, M_b + L_b));
-    // coeff2.slice(0) = coef;
-    // coeff2.slice(1) = coef;
-    // coeff2.slice(2) = coef;
     coeff_1 = cx_fmat(K_a, L_a, fill::zeros);
     coeff_2 = cx_fcube(K_b, M_b, L_b, fill::zeros);
     initialise_Coefficients(coeff1, coeff2);
@@ -119,7 +118,6 @@ void GMP_model_PA_impl::initialise_Coefficients(const std::vector<gr_complex>& c
         for (int j = 0; j < L_a; j++) {
             coeff_1(i, j) = coeff1[inx];
             inx++;
-            // std::cout << coeff_1(i, j) << "\n";
         }
     }
     inx = 0;
@@ -129,7 +127,6 @@ void GMP_model_PA_impl::initialise_Coefficients(const std::vector<gr_complex>& c
         for (int j = 0; j < M_b; j++) {
             for (int k = 0; k < L_b; k++) {
                 coeff_2(i, j, k) = coeff2[inx];
-                // std::cout << coeff_1(i, j) << "\n";
             }
         }
     }
@@ -225,9 +222,6 @@ int GMP_model_PA_impl::work(int noutput_items,
                 // std::cout << a << " " <<  << "\n";
             }
         }
-        // gr_complex a = GMP_vector((K_a * L_a));
-        // gr_complex b = coeff2(2, 2, 2);
-        // out[item - history() + 1] += (a * b);
         for (int m = 0; m < M_b; m++) {
             for (int k = 0; k < K_b; k++) {
                 // Include terms in output according to Mode of Operation value

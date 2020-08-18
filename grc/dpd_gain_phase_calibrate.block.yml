@@ -1,6 +1,6 @@
 id: dpd_gain_phase_calibrate
 label: Gain Phase Calibrate
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.gain_phase_calibrate()

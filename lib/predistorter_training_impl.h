@@ -33,8 +33,9 @@ public:
                                std::string mode,
                                const std::vector<gr_complex>& taps);
     ~predistorter_training_impl();
-
+    // Copies 'taps' from message PMT to local colvec variable
     void get_taps(pmt::pmt_t P);
+    // Generates shift-structured GMP vector based on parameters
     void gen_GMPvector(const gr_complex* const in,
                        int item,
                        int K_a,

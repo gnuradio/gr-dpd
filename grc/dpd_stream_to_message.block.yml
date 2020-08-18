@@ -1,6 +1,6 @@
 id: dpd_stream_to_message
 label: Stream to Message
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.stream_to_message()

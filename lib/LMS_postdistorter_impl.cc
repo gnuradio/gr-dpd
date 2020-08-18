@@ -70,15 +70,11 @@ LMS_postdistorter_impl::LMS_postdistorter_impl(const std::vector<int>& dpd_param
     for (int ii = 0; ii < sreg_len; ii++)
         sreg[ii] = 0.0;
 
-    //  // for (int ii = 0; ii < 10; ii++) {
-    //  //   sr1[ii] = gr_complexd(0.0, 0.0);
-    //  //   sr2[ii] = gr_complexd(0.0, 0.0);
-    //  // }
-    // // setup output message port
+    // setup output message port
     message_port_register_out(pmt::mp("taps"));
-    // // lambda = 1 - pow(2, 1 - k);
+    // lambda = 1 - pow(2, 1 - k);
 
-    // // taps or weight-vector
+    // taps or weight-vector
     w_iMinus1.set_size(M, 1);
     w_iMinus1 = zeros<cx_mat>(M, 1);
     w_iMinus1(0, 0) = gr_complex(1.0, 0.0);

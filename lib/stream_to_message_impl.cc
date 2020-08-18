@@ -46,6 +46,7 @@ int stream_to_message_impl::work(int noutput_items,
     // Do <+signal processing+>
 
     for (int i = 0; i < noutput_items; i++) {
+        // Converting stream item to message PMT
         pmt::pmt_t P_complex_samples = pmt::from_complex(in[i]);
         message_port_pub(pmt::mp("samples"), P_complex_samples);
     }

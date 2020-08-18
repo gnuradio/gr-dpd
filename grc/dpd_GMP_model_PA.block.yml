@@ -1,6 +1,6 @@
 id: dpd_GMP_model_PA
 label: GMP model PA
-category: '[Dpd]'
+category: '[DPD]'
 templates:
   imports: import dpd
   make: dpd.GMP_model_PA(${model_param1}, ${model_param2}, ${model_param3}, ${model_param4},

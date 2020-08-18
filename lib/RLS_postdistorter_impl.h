@@ -42,11 +42,13 @@ private:
 public:
     RLS_postdistorter_impl(const std::vector<int>& dpd_params, int iter_limit);
     ~RLS_postdistorter_impl();
-
-    // void get_PA_input(pmt::pmt_t P);
+    // Decides closeness to zero or null
     bool almost_equal(double a, double b, double tol);
+    // Givens rotation utility
     void givens_rotate(const cx_mat& in, cx_mat& out);
+    // Hyperbolics givens rotation utility
     void hgivens_rotate(const cx_mat& in, cx_mat& out);
+    // Extract g-vec after hyperbolics and givens rotation
     void extract_g_vecs(cx_mat& g,
                         cx_mat& g_vec_iMinus1,
                         cx_mat& g_vec_i,
@@ -57,9 +59,12 @@ public:
                         int L_b,
                         int M,
                         int M_bar);
+    // Extract calibrated PA_output in a shift-structured GMP vector
     void extract_postdistorted_y(
         cx_fmat& y_in, cx_fmat& y, int K_a, int L_a, int K_b, int M_b, int L_b, int M);
+    // Use hyperbolics and givens rotation accordingly
     void apply_rotations(const cx_mat& A, cx_mat& B);
+    // Genrates shift-structured GMP vector
     void gen_GMPvector(const gr_complex* const in,
                        int item,
                        int K_a,

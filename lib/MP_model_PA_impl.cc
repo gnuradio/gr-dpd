@@ -18,6 +18,8 @@
 using std::vector;
 using namespace arma;
 
+// Legacy Coefficents Default Values:
+//
 // cx_fmat coeff = {
 //     { { 0.9295, -0.0001 },
 //       { 0.2939, 0.0005 },
@@ -69,7 +71,7 @@ MP_model_PA_impl::MP_model_PA_impl(int Order,
                      gr::io_signature::make(1, 1, sizeof(gr_complex))),
       K_a(Order),     // Max. Order limited to 7
       L_a(Mem_Depth), // Max no. of taps or memory depth limited to 4
-      Mode_val(Mode)
+      Mode_val(Mode)  // Mode of operation, i.e., Even, Odd or Both
 {
     set_history(L_a);
     coeff = cx_fmat(K_a, L_a, fill::zeros);
@@ -90,7 +92,6 @@ void MP_model_PA_impl::initialise_Coefficients(const std::vector<gr_complex>& Co
         for (int j = 0; j < L_a; j++) {
             coeff(i, j) = Coeff[inx];
             inx++;
-            // std::cout << coeff_1(i, j) << "\n";
         }
     }
 }
@@ -139,6 +140,7 @@ int MP_model_PA_impl::work(int noutput_items,
         for (int K = 0; K < K_a; K++) {
             int L_st = (K * L_a);
             int L_en = ((K + 1) * L_a);
+            // Include terms in output according to Mode of Operation value
             if ((K % 2) == 0 && Mode_val == "Even")
                 continue;
             else if ((K % 2) && Mode_val == "Odd")
