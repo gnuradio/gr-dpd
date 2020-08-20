@@ -59,11 +59,12 @@ public:
      * \param iter_limit Iteration limit or Max. number of iterations of training
      *  to be performed for predistorter DPD coefficients estimation.
      * \param method Method of LMS algorithm used for coefficients estimation,
-     *  i.e., Newton or EMA based method.
+     *  i.e., Newton or EMA based method
+     * \param learning_rate Learning rate, float value can lie in range 0 to 1.
      *
      */
     static sptr
-    make(const std::vector<int>& dpd_params, int iter_limit, std::string method);
+    make(const std::vector<int>& dpd_params, int iter_limit, std::string method, gr_complexd learning_rate);
 };
 
 } // namespace dpd

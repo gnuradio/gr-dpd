@@ -42,14 +42,15 @@ private:
     const int sreg_len = 50;
     gr_complexd sreg[50];
     const gr_complexd* ptr_sreg = sreg;
-    gr_complexd pa_input, error;
+    gr_complexd pa_input, error, learning_rate;
 
     std::vector<gr_complexd> taps;
 
 public:
     LMS_postdistorter_impl(const std::vector<int>& dpd_params,
                            int iter_limit,
-                           std::string method);
+                           std::string method,
+                           gr_complexd learning_rate);
     ~LMS_postdistorter_impl();
 
     // Least Squares Estimation utility

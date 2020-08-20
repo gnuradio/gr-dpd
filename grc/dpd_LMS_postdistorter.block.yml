@@ -3,7 +3,7 @@ label: LMS postdistorter
 category: '[DPD]'
 templates:
   imports: import dpd
-  make: dpd.LMS_postdistorter(${dpd_params}, ${iter_limit}, ${method})
+  make: dpd.LMS_postdistorter(${dpd_params}, ${iter_limit}, ${method}, ${learning_rate})
 parameters:
 - id: dpd_params
   label: Dpd_params
@@ -17,6 +17,10 @@ parameters:
   default: "newton"
   options: ["newton", "ema"]
   option_labels: [Newton, EMA]
+- id: learning_rate
+  label: Learning rate
+  dtype: complex
+  default: 0.75
 inputs:
 - label: in
   domain: stream

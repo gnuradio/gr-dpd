@@ -192,8 +192,8 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1)
-    coeff2: (1)
+    coeff1: (2.5+0.2j)
+    coeff2: (1.3 + 2.4j, 2.1+3.0j, 1, 1, 1, 1, 1, 1)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -215,17 +215,17 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1)
-    coeff2: (1)
+    coeff1: (2.5+0.2j)
+    coeff2: (1.3 + 2.4j, 2.1+3.0j)
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: Both
     model_param1: '1'
     model_param2: '1'
-    model_param3: '1'
-    model_param4: '1'
-    model_param5: '1'
+    model_param3: '2'
+    model_param4: '2'
+    model_param5: '2'
   states:
     bus_sink: false
     bus_source: false
@@ -240,7 +240,8 @@ blocks:
     alias: ''
     comment: ''
     dpd_params: (1,1,2,2,2)
-    iter_limit: '10000'
+    iter_limit: '1000'
+    learning_rate: '0.5'
     maxoutbuf: '0'
     method: newton
     minoutbuf: '0'

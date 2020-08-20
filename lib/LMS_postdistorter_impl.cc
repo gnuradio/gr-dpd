@@ -38,10 +38,11 @@ namespace dpd {
 
 LMS_postdistorter::sptr LMS_postdistorter::make(const std::vector<int>& dpd_params,
                                                 int iter_limit,
-                                                std::string method)
+                                                std::string method,
+                                                gr_complexd learning_rate)
 {
     return gnuradio::get_initial_sptr(
-        new LMS_postdistorter_impl(dpd_params, iter_limit, method));
+        new LMS_postdistorter_impl(dpd_params, iter_limit, method, learning_rate));
 }
 
 
@@ -50,7 +51,8 @@ LMS_postdistorter::sptr LMS_postdistorter::make(const std::vector<int>& dpd_para
  */
 LMS_postdistorter_impl::LMS_postdistorter_impl(const std::vector<int>& dpd_params,
                                                int iter_limit,
-                                               std::string method)
+                                               std::string method,
+                                               gr_complexd learning_rate)
     : gr::sync_block("LMS_postdistorter",
                      gr::io_signature::make(2, 2, sizeof(gr_complex)),
                      gr::io_signature::make(0, 0, 0)),
@@ -62,7 +64,8 @@ LMS_postdistorter_impl::LMS_postdistorter_impl(const std::vector<int>& dpd_param
       L_b(d_dpd_params[4]),
       M(dpd_params[0] * dpd_params[1] + dpd_params[2] * dpd_params[3] * dpd_params[4]),
       d_iter_limit(iter_limit),
-      str(method)
+      str(method),
+      learning_rate(learning_rate)
 {
     // set_history(std::max(L_a, L_b + M_b));
     iteration = 1;
@@ -185,6 +188,7 @@ int LMS_postdistorter_impl::work(int noutput_items,
         pa_input = in2[item];
         sreg[49] = in1[item];
 
+        // extracting the PA output and arranging into a shift-structured GMP vector
         cx_colvec GMP_vector(M);
         gen_GMPvector(ptr_sreg, 49, K_a, L_a, K_b, M_b, L_b, GMP_vector);
 
@@ -194,16 +198,19 @@ int LMS_postdistorter_impl::work(int noutput_items,
         for (int ii = 1; ii < sreg_len; ii++)
             sreg[ii - 1] = sreg[ii];
 
-        cx_mat learning_rate = { 0.75 };
-        cx_mat learning_rate_1_minus = { 0.25 };
+        cx_mat l_rate(1, 1, fill::zeros);
+        l_rate(0, 0) = learning_rate;
+        cx_mat l_rate_1_minus(1, 1, fill::zeros);
+        l_rate_1_minus(0, 0) = gr_complexd(1.0, 0.0) - learning_rate;
+        
         if (str == "newton") {
             error = pa_input - as_scalar(pa_output_t * w_iMinus1);
             cx_mat ls_result = ls_estimation(pa_output, error);
-            w_iMinus1 = w_iMinus1 + (ls_result * learning_rate);
+            w_iMinus1 = w_iMinus1 + (ls_result * l_rate);
         }
         if (str == "ema") {
             cx_mat ls_result = ls_estimation(pa_output, pa_input);
-            w_iMinus1 = (w_iMinus1 * learning_rate_1_minus) + (ls_result * learning_rate);
+            w_iMinus1 = (w_iMinus1 * l_rate_1_minus) + (ls_result * l_rate);
         }
         // send weight-vector to predistorter block in a message
         taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
