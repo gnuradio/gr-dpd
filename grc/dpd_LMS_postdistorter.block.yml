@@ -28,6 +28,9 @@ inputs:
 - label: PA_Input
   domain: stream
   dtype: complex
+- label: Flag
+  domain: stream
+  dtype: complex
 outputs:
 - label: taps
   domain: message

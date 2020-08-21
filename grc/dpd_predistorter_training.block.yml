@@ -13,7 +13,7 @@ parameters:
   option_labels: [Training, Static]
 - id: tap
   label: Predistorter Taps
-  dtype: complex_vector
+  dtype: complex_vector 
   default: (1) 
   hide: ${ ('all' if mode == "training" else 'part') }
 inputs:
@@ -28,6 +28,10 @@ outputs:
 - label: Out/ PA_Input
   domain: stream
   dtype: complex
+- label: Flag 
+  domain: stream
+  dtype: complex
+  optional: true
 templates:
   imports: import dpd
   make: dpd.predistorter_training(${dpd_params}, ${mode}, ${tap})

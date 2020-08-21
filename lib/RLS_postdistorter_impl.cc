@@ -37,7 +37,7 @@ RLS_postdistorter::sptr RLS_postdistorter::make(const std::vector<int>& dpd_para
 RLS_postdistorter_impl::RLS_postdistorter_impl(const std::vector<int>& dpd_params,
                                                int iter_limit)
     : gr::sync_block("RLS_postdistorter",
-                     gr::io_signature::make(2, 2, sizeof(gr_complex)),
+                     gr::io_signature::make(3, 3, sizeof(gr_complex)),
                      gr::io_signature::make(0, 0, 0)),
       d_dpd_params(dpd_params),
       K_a(d_dpd_params[0]),
@@ -417,8 +417,9 @@ int RLS_postdistorter_impl::work(int noutput_items,
                                  gr_vector_const_void_star& input_items,
                                  gr_vector_void_star& output_items)
 {
-    const gr_complex* in1 = (const gr_complex*)input_items[0];
-    const gr_complex* in2 = (const gr_complex*)input_items[1];
+    const gr_complex* in1 = (const gr_complex*)input_items[0]; // PA_output (gain phase calibrated)
+    const gr_complex* in2 = (const gr_complex*)input_items[1]; // PA input or Predistorter output
+    const gr_complex* flag = (const gr_complex*)input_items[2];    
 
     // Do <+signal processing+>
     // copy private variables accessed by the asynchronous message handler block
@@ -427,6 +428,9 @@ int RLS_postdistorter_impl::work(int noutput_items,
         // get number of samples consumed since the beginning of time by this block
         // from port 0
         const uint64_t nread = this->nitems_read(0);
+        // If flag is not set then no coeff. estimation is performed
+        if(flag[item] == gr_complex(0.0, 0.0))
+                continue;
 
         if (iteration == d_iter_limit) {
             taps = conv_to<vector<gr_complexd>>::from(w_iMinus1);
@@ -455,8 +459,6 @@ int RLS_postdistorter_impl::work(int noutput_items,
 
         // time-update for 1/sqrt(gamma)
         inv_sqrt_gamma_iMinus1 = real(B_mat(0, 0)); // imag(B_mat(0, 0)) will be ~= 0.0
-        // std::cout << "inv_sqrt_gamma_iMinus1: " << inv_sqrt_gamma_iMinus1 <<
-        // std::endl;
 
         // time-update for g-vector
         g = B_mat(span(1, M + M_bar), 0);

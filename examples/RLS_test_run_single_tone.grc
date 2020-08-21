@@ -377,6 +377,7 @@ connections:
 - [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
 - [dpd_predistorter_training_0, '0', dpd_RLS_postdistorter_0, '1']
+- [dpd_predistorter_training_0, '1', dpd_RLS_postdistorter_0, '2']
 
 metadata:
   file_format: 1

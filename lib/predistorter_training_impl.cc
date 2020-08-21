@@ -42,7 +42,7 @@ predistorter_training_impl::predistorter_training_impl(
     const std::vector<gr_complex>& taps)
     : gr::sync_block("predistorter_training",
                      gr::io_signature::make(1, 1, sizeof(gr_complex)),
-                     gr::io_signature::make(1, 1, sizeof(gr_complex))),
+                     gr::io_signature::make(1, 2, sizeof(gr_complex))),
       K_a(dpd_params[0]),
       L_a(dpd_params[1]),
       K_b(dpd_params[2]),
@@ -152,16 +152,15 @@ int predistorter_training_impl::work(int noutput_items,
                                      gr_vector_void_star& output_items)
 {
     gr_complex* out = (gr_complex*)output_items[0];
-
+    gr_complex* flag = (gr_complex*)output_items[1];
     // Do <+signal processing+>
     for (int item = history() - 1; item < noutput_items + history() - 1; item++) {
-        // get PA input which has been arranged in a GMP vector format
-        // for predistortion
-        // cx_fmat yy_cx_rowvec(
-        //     ((gr_complex*)input_items[0]) + item * d_M, 1, d_M, COPY_MEM, FIX_SIZE);
-
+        
         predistorter_training_colvec = d_predistorter_training_colvec;
         update_predistorter_training = d_update_predistorter_training;
+        
+        // get PA input which has been arranged in a GMP vector format
+        // for predistortion
         cx_fcolvec GMP_vector(d_M);
         gen_GMPvector(
             (const gr_complex*)input_items[0], item, K_a, L_a, K_b, M_b, L_b, GMP_vector);
@@ -170,8 +169,22 @@ int predistorter_training_impl::work(int noutput_items,
         // apply predistortion and send the PA input to postdistorter
         out[item - history() + 1] = as_scalar(
             conv_to<cx_fmat>::from(yy_cx_rowvec * predistorter_training_colvec));
-        // pmt::pmt_t P_complex_PA_input = pmt::from_complex(out[item]);
-        // message_port_pub(pmt::mp("PA_input"), P_complex_PA_input);
+
+        // Flag output only if mode of operation is 'static' 
+        if(d_mode == "static")
+        {
+        	continue;
+        }
+
+        // Setting flag output according to whether 'taps' are recieved 
+        // or not
+        if(update_predistorter_training || item == history() - 1)
+        {
+            flag[item - history() + 1] = gr_complex(1.0, 0.0);
+        }
+        else
+            flag[item - history() + 1] = gr_complex(0.0, 0.0);
+        d_update_predistorter_training = false;
     }
     // Tell runtime system how many output items we produced.
     return noutput_items;
