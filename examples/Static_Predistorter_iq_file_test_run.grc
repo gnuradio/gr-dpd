@@ -1,0 +1,390 @@
+options:
+  parameters:
+    author: alekh
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: test
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 15]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: param_0
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: '[0,0,1,1]'
+    label: Frequency
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1000'
+    stop: '500000'
+    value: '7000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [198, 21]
+    rotation: 0
+    state: true
+- name: param_1
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: '[0,1,1,1]'
+    label: Amplitude
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.01'
+    stop: '3'
+    value: '0.5'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [351, 23]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '1000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [20, 142]
+    rotation: 0
+    state: true
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/alekh/gr-dpd/examples/Data_Files/Output.bin
+    type: complex
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1129, 353]
+    rotation: 0
+    state: true
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: gr-dpd/examples/Data_Files/Input.bin
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 304]
+    rotation: 0
+    state: true
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 337]
+    rotation: 0
+    state: true
+- name: dpd_GMP_model_PA_0
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    coeff1: (1.13009008-0.12616218j, -0.09705140+0.15224208j, -0.06966981-0.01212059j,
+      -0.05285608-0.05305477j, 0.04687984-0.00207777j, 0.02600698+0.02553034j)
+    coeff2: ( -0.07853527-0.00276647j, 0.08182787+0.0277548j, 0.09832700+0.026040201j,
+      -0.06854425-0.02041091j, -0.04878962-0.01979666j, 0.02527260+0.00771167j)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: Both
+    model_param1: '3'
+    model_param2: '2'
+    model_param3: '3'
+    model_param4: '2'
+    model_param5: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 168]
+    rotation: 0
+    state: true
+- name: dpd_GMP_model_PA_1
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    coeff1: (1.13009008-0.12616218j, -0.09705140+0.15224208j, -0.06966981-0.01212059j,
+      -0.05285608-0.05305477j, 0.04687984-0.00207777j, 0.02600698+0.02553034j)
+    coeff2: ( -0.07853527-0.00276647j, 0.08182787+0.0277548j, 0.09832700+0.026040201j,
+      -0.06854425-0.02041091j, -0.04878962-0.01979666j, 0.02527260+0.00771167j)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: Both
+    model_param1: '3'
+    model_param2: '2'
+    model_param3: '3'
+    model_param4: '2'
+    model_param5: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [423, 462]
+    rotation: 0
+    state: true
+- name: dpd_predistorter_training_0
+  id: dpd_predistorter_training
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dpd_params: (3,2,3,2,1)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: static
+    tap: (0.87760033+0.12275496j, 0.08798957-0.14373307j, 0.04626261+0.00934458j,
+      0.08698256+0.04143527j, -0.03903108-0.00112882j, -0.03476379-0.00912934j, 0.08377796+0.02606456j,
+      -0.08868867-0.04787423j, -0.10071640-0.04142282j, 0.05951364+0.03461860j, 0.04841621+0.02046442j,
+      -0.02023946-0.01280763j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [471, 211]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_1
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '4096'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: '[1,0,4,1]'
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"PA_without_DPD"'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_FLATTOP
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [895, 505]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_2
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '4096'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: '[1,1,4,1]'
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"PA_with_DPD"'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_FLATTOP
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1143, 213]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_file_source_0, '0', blocks_throttle_0, '0']
+- [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_throttle_0, '0', dpd_predistorter_training_0, '0']
+- [dpd_GMP_model_PA_0, '0', blocks_file_sink_0, '0']
+- [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
+- [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
+- [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
+
+metadata:
+  file_format: 1
