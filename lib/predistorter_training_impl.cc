@@ -116,6 +116,9 @@ void predistorter_training_impl::gen_GMPvector(const gr_complex* const in,
         GMP_vector.rows(kk * L_a, (kk + 1) * L_a - 1) = yy_temp;
     }
 
+    if(K_b == 0)
+        return;
+
     /* Signal-and-Delayed Envelope */
     // stacking L_b+M_b elements in reverse order
     cx_fcolvec y_vec_arma23(L_b + M_b, fill::zeros);
@@ -164,7 +167,7 @@ int predistorter_training_impl::work(int noutput_items,
         cx_fcolvec GMP_vector(d_M);
         gen_GMPvector(
             (const gr_complex*)input_items[0], item, K_a, L_a, K_b, M_b, L_b, GMP_vector);
-        cx_fmat yy_cx_rowvec = GMP_vector.t();
+        cx_fmat yy_cx_rowvec = GMP_vector.st();
 
         // apply predistortion and send the PA input to postdistorter
         out[item - history() + 1] = as_scalar(
