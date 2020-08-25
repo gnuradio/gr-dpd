@@ -116,8 +116,8 @@ void predistorter_training_impl::gen_GMPvector(const gr_complex* const in,
         GMP_vector.rows(kk * L_a, (kk + 1) * L_a - 1) = yy_temp;
     }
 
-    // if(K_b == 0)
-    //     return;
+    if(K_b == 0)
+        return;
 
     /* Signal-and-Delayed Envelope */
     // stacking L_b+M_b elements in reverse order

@@ -1,0 +1,263 @@
+options:
+  parameters:
+    author: alekh
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: top_block
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '1000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [250, 24]
+    rotation: 0
+    state: true
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/alekh/gr-dpd/examples/Data_Files/Input.bin
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [114, 430]
+    rotation: 0
+    state: true
+- name: dpd_GMP_model_PA_0
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    coeff1: (1)
+    coeff2: (1, 1, 1, 1, 1, 1, 1, 1)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: Both
+    model_param1: '1'
+    model_param2: '1'
+    model_param3: '2'
+    model_param4: '2'
+    model_param5: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1026, 58]
+    rotation: 0
+    state: true
+- name: dpd_GMP_model_PA_1
+  id: dpd_GMP_model_PA
+  parameters:
+    affinity: ''
+    alias: ''
+    coeff1: (1)
+    coeff2: (1, 1, 1, 1, 1, 1, 1, 1)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: Both
+    model_param1: '1'
+    model_param2: '1'
+    model_param3: '2'
+    model_param4: '2'
+    model_param5: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 644]
+    rotation: 0
+    state: true
+- name: dpd_RLS_postdistorter_0
+  id: dpd_RLS_postdistorter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dpd_params: (3, 3, 2, 2, 2)
+    iter_limit: '50'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [615, 228]
+    rotation: 180
+    state: true
+- name: dpd_gain_phase_calibrate_0
+  id: dpd_gain_phase_calibrate
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 393]
+    rotation: 180
+    state: true
+- name: dpd_predistorter_training_0
+  id: dpd_predistorter_training
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dpd_params: (3,3,2,2,2)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mode: training
+    tap: (1)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [610, 91]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '0.05'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"green"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"blue"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '4096'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: PA_DPD
+    label10: ''''''
+    label2: PA_without_DPD
+    label3: Predistorter_out
+    label4: Input
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"PA_with_DPD"'
+    nconnections: '4'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1370, 485]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_file_source_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_file_source_0, '0', dpd_gain_phase_calibrate_0, '1']
+- [blocks_file_source_0, '0', dpd_predistorter_training_0, '0']
+- [blocks_file_source_0, '0', qtgui_freq_sink_x_0, '3']
+- [dpd_GMP_model_PA_0, '0', dpd_gain_phase_calibrate_0, '2']
+- [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_0, '0']
+- [dpd_GMP_model_PA_1, '0', dpd_gain_phase_calibrate_0, '0']
+- [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_0, '1']
+- [dpd_RLS_postdistorter_0, taps, dpd_predistorter_training_0, taps]
+- [dpd_gain_phase_calibrate_0, '0', dpd_RLS_postdistorter_0, '0']
+- [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
+- [dpd_predistorter_training_0, '0', dpd_RLS_postdistorter_0, '1']
+- [dpd_predistorter_training_0, '0', qtgui_freq_sink_x_0, '2']
+- [dpd_predistorter_training_0, '1', dpd_RLS_postdistorter_0, '2']
+
+metadata:
+  file_format: 1
