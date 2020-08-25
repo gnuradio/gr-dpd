@@ -32,48 +32,6 @@ options:
     state: enabled
 
 blocks:
-- name: param_0
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: '[0,0,1,1]'
-    label: Frequency
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: int
-    start: '0'
-    step: '1000'
-    stop: '500000'
-    value: '7000'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [198, 21]
-    rotation: 0
-    state: true
-- name: param_1
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: '[0,1,1,1]'
-    label: Amplitude
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: '0'
-    step: '0.01'
-    stop: '3'
-    value: '0.5'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [351, 23]
-    rotation: 0
-    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -86,24 +44,6 @@ blocks:
     coordinate: [20, 142]
     rotation: 0
     state: true
-- name: blocks_file_sink_0
-  id: blocks_file_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    append: 'False'
-    comment: ''
-    file: /home/alekh/gr-dpd/examples/Data_Files/Output.bin
-    type: complex
-    unbuffered: 'False'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1129, 353]
-    rotation: 0
-    state: true
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -111,19 +51,85 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: gr-dpd/examples/Data_Files/Input.bin
+    file: /home/alekh/gr-dpd/examples/Data_Files/Input.bin
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
-    repeat: 'False'
+    repeat: 'True'
     type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 304]
+    coordinate: [17, 303]
+    rotation: 0
+    state: true
+- name: blocks_file_source_1
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/alekh/gr-dpd/examples/Data_Files/Pre_output.bin
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [23, 594]
+    rotation: 0
+    state: true
+- name: blocks_file_source_2
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/alekh/gr-dpd/examples/Data_Files/PA_output.bin
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [23, 470]
+    rotation: 0
+    state: true
+- name: blocks_file_source_3
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/alekh/gr-dpd/examples/Data_Files/DPD_output.bin
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [25, 721]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -142,7 +148,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 337]
+    coordinate: [225, 336]
     rotation: 0
     state: true
 - name: dpd_GMP_model_PA_0
@@ -150,49 +156,59 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1.13009008-0.12616218j, -0.09705140+0.15224208j, -0.06966981-0.01212059j,
-      -0.05285608-0.05305477j, 0.04687984-0.00207777j, 0.02600698+0.02553034j)
-    coeff2: ( -0.07853527-0.00276647j, 0.08182787+0.0277548j, 0.09832700+0.026040201j,
-      -0.06854425-0.02041091j, -0.04878962-0.01979666j, 0.02527260+0.00771167j)
+    coeff1: (1.28769-0.111605j, -0.50833 + 0.137871j, 0.335389-0.0134684j, -0.0868048
+      + 0.0135188j, 0.0575589 + 0.00569071j, -0.0214747-0.00246204j, 0.00917855-0.00301492j,
+      0.00154732-0.00070201j, -0.630797-0.154092j, 0.172001 + 0.00150688j, -0.0769952
+      + 0.00863082j, 0.0150942-0.0011158j, 1.13973 + 0.302503j, -0.25345-0.00774979j,
+      0.104181-0.0123131j, -0.0201363 + 0.00341023j, -0.890937-0.257449j, 0.167579
+      + 0.0110977j, -0.0610137 + 0.00806345j, 0.00871952-0.00229729j, 0.329788 + 0.0977802j,
+      -0.0522678-0.003401j, 0.0165061-0.0038637j, -0.00078466 + 0.00119397j, -0.0478727-0.0138887j,
+      0.00658903 + 1.184e-05j, -0.00183026 + 0.00084236j, -0.00011362-0.00025357j)
+    coeff2: ()
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: Both
-    model_param1: '3'
-    model_param2: '2'
-    model_param3: '3'
-    model_param4: '2'
-    model_param5: '1'
+    model_param1: '7'
+    model_param2: '4'
+    model_param3: '0'
+    model_param4: '0'
+    model_param5: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 168]
+    coordinate: [821, 37]
     rotation: 0
     state: true
-- name: dpd_GMP_model_PA_1
+- name: dpd_GMP_model_PA_0_0
   id: dpd_GMP_model_PA
   parameters:
     affinity: ''
     alias: ''
-    coeff1: (1.13009008-0.12616218j, -0.09705140+0.15224208j, -0.06966981-0.01212059j,
-      -0.05285608-0.05305477j, 0.04687984-0.00207777j, 0.02600698+0.02553034j)
-    coeff2: ( -0.07853527-0.00276647j, 0.08182787+0.0277548j, 0.09832700+0.026040201j,
-      -0.06854425-0.02041091j, -0.04878962-0.01979666j, 0.02527260+0.00771167j)
+    coeff1: (1.28769-0.111605j, -0.50833 + 0.137871j, 0.335389-0.0134684j, -0.0868048
+      + 0.0135188j, 0.0575589 + 0.00569071j, -0.0214747-0.00246204j, 0.00917855-0.00301492j,
+      0.00154732-0.00070201j, -0.630797-0.154092j, 0.172001 + 0.00150688j, -0.0769952
+      + 0.00863082j, 0.0150942-0.0011158j, 1.13973 + 0.302503j, -0.25345-0.00774979j,
+      0.104181-0.0123131j, -0.0201363 + 0.00341023j, -0.890937-0.257449j, 0.167579
+      + 0.0110977j, -0.0610137 + 0.00806345j, 0.00871952-0.00229729j, 0.329788 + 0.0977802j,
+      -0.0522678-0.003401j, 0.0165061-0.0038637j, -0.00078466 + 0.00119397j, -0.0478727-0.0138887j,
+      0.00658903 + 1.184e-05j, -0.00183026 + 0.00084236j, -0.00011362-0.00025357j)
+    coeff2: ()
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: Both
-    model_param1: '3'
-    model_param2: '2'
-    model_param3: '3'
-    model_param4: '2'
-    model_param5: '1'
+    model_param1: '7'
+    model_param2: '4'
+    model_param3: '0'
+    model_param4: '0'
+    model_param5: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [423, 462]
+    coordinate: [483, 376]
     rotation: 0
     state: true
 - name: dpd_predistorter_training_0
@@ -201,19 +217,23 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dpd_params: (3,2,3,2,1)
+    dpd_params: (7,4,0,0,0)
     maxoutbuf: '0'
     minoutbuf: '0'
     mode: static
-    tap: (0.87760033+0.12275496j, 0.08798957-0.14373307j, 0.04626261+0.00934458j,
-      0.08698256+0.04143527j, -0.03903108-0.00112882j, -0.03476379-0.00912934j, 0.08377796+0.02606456j,
-      -0.08868867-0.04787423j, -0.10071640-0.04142282j, 0.05951364+0.03461860j, 0.04841621+0.02046442j,
-      -0.02023946-0.01280763j)
+    tap: ( 0.749853 + 0.0721735j, 0.402292-0.0341349j, -0.220823-0.0689306j, 0.0436162
+      + 0.00988231j, -0.0721543-0.0166072j, -0.0149487-0.00596445j, 0.00568216 + 0.00553791j,
+      -0.0198147-0.0169567j, 0.592629 + 0.181j, 0.152689 + 0.0670107j, -0.0742328-0.0712551j,
+      0.0757413 + 0.0598319j, -1.07525-0.337834j, -0.313603-0.12192j, 0.150965 + 0.140389j,
+      -0.129686-0.0924388j, 0.864111 + 0.281309j, 0.267537 + 0.102013j, -0.125375-0.117674j,
+      0.108304 + 0.0701429j, -0.330368-0.108277j, -0.105963-0.040706j, 0.0481545 +
+      0.0458514j, -0.0435915-0.0260587j, 0.0493359 + 0.0160046j, 0.0158946 + 0.00633111j,
+      -0.00703489-0.00684718j, 0.00673218 + 0.00374989j)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [471, 211]
+    coordinate: [510, 214]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_1
@@ -232,7 +252,7 @@ blocks:
     alpha8: '1.0'
     alpha9: '1.0'
     autoscale: 'False'
-    average: '1.0'
+    average: '0.05'
     axislabels: 'True'
     bw: samp_rate
     color1: '"blue"'
@@ -251,13 +271,13 @@ blocks:
     fftsize: '4096'
     freqhalf: 'True'
     grid: 'False'
-    gui_hint: '[1,0,4,1]'
+    gui_hint: '[0,0,4,1]'
     label: Relative Gain
-    label1: ''
+    label1: '''Input'''
     label10: ''''''
-    label2: ''''''
-    label3: ''''''
-    label4: ''''''
+    label2: '''PA_without_DPD'''
+    label3: '''Predistorter_out'''
+    label4: '''PA_with_DPD'''
     label5: ''''''
     label6: ''''''
     label7: ''''''
@@ -266,8 +286,8 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"PA_without_DPD"'
-    nconnections: '1'
+    name: '"GNU Radio DPD Plot"'
+    nconnections: '4'
     showports: 'False'
     tr_chan: '0'
     tr_level: '0.0'
@@ -286,14 +306,14 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_FLATTOP
+    wintype: firdes.WIN_BLACKMAN_hARRIS
     ymax: '10'
     ymin: '-140'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [895, 505]
+    coordinate: [1190, 344]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2
@@ -312,7 +332,7 @@ blocks:
     alpha8: '1.0'
     alpha9: '1.0'
     autoscale: 'False'
-    average: '1.0'
+    average: '0.05'
     axislabels: 'True'
     bw: samp_rate
     color1: '"blue"'
@@ -331,13 +351,13 @@ blocks:
     fftsize: '4096'
     freqhalf: 'True'
     grid: 'False'
-    gui_hint: '[1,1,4,1]'
+    gui_hint: '[0,1,4,1]'
     label: Relative Gain
-    label1: ''
+    label1: '''Input'''
     label10: ''''''
-    label2: ''''''
-    label3: ''''''
-    label4: ''''''
+    label2: '''PA_without_DPD'''
+    label3: '''Predistorter_out'''
+    label4: '''PA_with_DPD'''
     label5: ''''''
     label6: ''''''
     label7: ''''''
@@ -346,8 +366,8 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"PA_with_DPD"'
-    nconnections: '1'
+    name: '"Data Files Plot"'
+    nconnections: '4'
     showports: 'False'
     tr_chan: '0'
     tr_level: '0.0'
@@ -366,25 +386,30 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_FLATTOP
+    wintype: firdes.WIN_BLACKMAN_hARRIS
     ymax: '10'
     ymin: '-140'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1143, 213]
+    coordinate: [505, 533]
     rotation: 0
     state: true
 
 connections:
 - [blocks_file_source_0, '0', blocks_throttle_0, '0']
-- [blocks_throttle_0, '0', dpd_GMP_model_PA_1, '0']
+- [blocks_file_source_1, '0', qtgui_freq_sink_x_2, '2']
+- [blocks_file_source_2, '0', qtgui_freq_sink_x_2, '1']
+- [blocks_file_source_3, '0', qtgui_freq_sink_x_2, '3']
+- [blocks_throttle_0, '0', dpd_GMP_model_PA_0_0, '0']
 - [blocks_throttle_0, '0', dpd_predistorter_training_0, '0']
-- [dpd_GMP_model_PA_0, '0', blocks_file_sink_0, '0']
-- [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_2, '0']
-- [dpd_GMP_model_PA_1, '0', qtgui_freq_sink_x_1, '0']
+- [blocks_throttle_0, '0', qtgui_freq_sink_x_1, '0']
+- [blocks_throttle_0, '0', qtgui_freq_sink_x_2, '0']
+- [dpd_GMP_model_PA_0, '0', qtgui_freq_sink_x_1, '3']
+- [dpd_GMP_model_PA_0_0, '0', qtgui_freq_sink_x_1, '1']
 - [dpd_predistorter_training_0, '0', dpd_GMP_model_PA_0, '0']
+- [dpd_predistorter_training_0, '0', qtgui_freq_sink_x_1, '2']
 
 metadata:
   file_format: 1
