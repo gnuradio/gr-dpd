@@ -147,7 +147,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [29, 420]
+    coordinate: [46, 414]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -360,7 +360,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1796, 653]
+    coordinate: [1563, 652]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_2
@@ -440,7 +440,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1633, 70]
+    coordinate: [1625, 66]
     rotation: 0
     state: true
 
