@@ -8,7 +8,7 @@ The gr-dpd module is a GNU Radio implementation of Digital Pre-Distortion, a pop
 distortion caused due to non-linear Power Amplifiers used in wireless communication today.
 
 This has been developed as a [GSoC 2020 project](https://summerofcode.withgoogle.com/projects/#6468946162614272)
-under [GNU Radio](https://summerofcode.withgoogle.com/organizations/6453828414603264/) by ![Alekh Gupta](https://github.com/alekhgupta1441) under guidance of mentors: ![Derek Kozel](https://github.com/dkozel), ![Andrej Rode](https://github.com/noc0lour) and ![Zack Costello](https://github.com/ZCostello).
+under [GNU Radio](https://summerofcode.withgoogle.com/organizations/6453828414603264/) by [Alekh Gupta](https://github.com/alekhgupta1441) under guidance of mentors: [Derek Kozel](https://github.com/dkozel), [Andrej Rode](https://github.com/noc0lour) and [Zack Costello](https://github.com/ZCostello).
 
 Major DPD Algorithms considered for this module are:
 
@@ -33,7 +33,7 @@ The blocks added to the module, so far, are:
 
 gr-dpd requires:
 
-`GNU Radio` version = 3.8  
+`GNU Radio` version = 3.8   ([GR 3.8 installation guide](https://wiki.gnuradio.org/index.php/InstallingGR#For_GNU_Radio_3.8_or_Earlier))
 
 `Armadillo` version >= 6.7
 
